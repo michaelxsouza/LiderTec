@@ -45,6 +45,19 @@ $$("[data-wa]").forEach((a) => {
   a.addEventListener("click", () => trackConversion(CFG.conversionLabelWhatsapp, { event_category: "whatsapp", curso: COURSE }));
 });
 
+/* ---------- Botões "Receber informações" / "Preencher formulário" ---------- */
+$$('a[href="#formulario"]').forEach((a) => {
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    const card = $("#formulario");
+    if (!card) return;
+    card.scrollIntoView({ behavior: "smooth", block: "start" });
+    const first = $("#f-nome");
+    if (first) setTimeout(() => first.focus({ preventScroll: true }), 500);
+    history.replaceState(null, "", "#formulario");
+  });
+});
+
 /* ---------- Formulário ---------- */
 const form = $("#lp-form");
 const fieldOf = (name) => form.elements[name];

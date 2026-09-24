@@ -75,7 +75,7 @@ def page(c):
 
 <main>
 <!-- ============ HERO + FORMULÁRIO ============ -->
-<section class="lp-hero" id="formulario">
+<section class="lp-hero">
   <div class="container lp-hero-grid">
     <div class="lp-hero-copy">
       <p class="lp-kicker">{I(c["icon"])} Certificação por competência</p>
@@ -89,7 +89,7 @@ def page(c):
       </ul>
     </div>
 
-    <div class="lp-form-card">
+    <div class="lp-form-card" id="formulario">
       <form id="lp-form" novalidate>
         <h2>Receba as informações</h2>
         <p>Preencha e um consultor fala com você pelo WhatsApp.</p>

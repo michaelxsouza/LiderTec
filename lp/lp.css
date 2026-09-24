@@ -91,3 +91,5 @@ body.lp { background: var(--white); }
 @media (min-width: 641px) { .lp-footer { padding-bottom: 28px; } }
 
 .lp .wa-float { display: none; }
+
+#formulario { scroll-margin-top: 84px; }
