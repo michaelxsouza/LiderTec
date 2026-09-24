@@ -4,19 +4,11 @@
    <body class="lp" data-course="Segurança do Trabalho" data-ref="LP-SST">
    ========================================================= */
 
-/* ---------------- CONFIGURAÇÕES EDITÁVEIS ---------------- */
-
-// Número do WhatsApp (DDI + DDD + número, só dígitos)
-const whatsappNumber = "553171942302";
-
-// Endereço que recebe o formulário (POST em JSON). Vazio = envio simulado.
-const FORM_ENDPOINT = "";
-
-// Google Ads: ID da conta (ex.: "AW-123456789") e rótulos de conversão.
-// Deixe vazio até criar as conversões no Google Ads.
-const GOOGLE_ADS_ID = "";
-const CONVERSION_LABEL_FORM = "";      // conversão "Formulário enviado"
-const CONVERSION_LABEL_WHATSAPP = "";  // conversão "Clique no WhatsApp"
+/* Configurações (WhatsApp, envio do formulário, Google Ads) ficam em
+   assets/js/config.js, compartilhado com o site principal. */
+const CFG = window.LIDERTEC_CONFIG || {};
+const whatsappNumber = CFG.whatsappNumber || "553171942302";
+const LT = window.LiderTec || { sendLead: async () => ({ simulated: true }), track: () => {} };
 
 /* ========================================================= */
 const $ = (s, el = document) => el.querySelector(s);
@@ -39,23 +31,7 @@ const tracking = getTracking();
 const fromAds = Boolean(tracking.gclid || /google/i.test(tracking.utm_source || ""));
 const refCode = `${REF}${fromAds ? "-GADS" : ""}`;
 
-/* ---------- Google Ads (gtag) ---------- */
-if (GOOGLE_ADS_ID) {
-  const s = document.createElement("script");
-  s.async = true;
-  s.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`;
-  document.head.appendChild(s);
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function () { dataLayer.push(arguments); };
-  gtag("js", new Date());
-  gtag("config", GOOGLE_ADS_ID);
-}
-function trackConversion(label, extra = {}) {
-  if (GOOGLE_ADS_ID && label && window.gtag) {
-    gtag("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/${label}`, ...extra });
-  }
-  console.info("[LíderTec] conversão:", label || "(sem rótulo configurado)", extra);
-}
+function trackConversion(label, extra = {}) { LT.track(label, extra); }
 
 /* ---------- WhatsApp ---------- */
 function waLink(msg) {
@@ -66,7 +42,7 @@ $$("[data-wa]").forEach((a) => {
   a.href = waLink(a.dataset.wa || defaultWaMsg);
   a.target = "_blank";
   a.rel = "noopener";
-  a.addEventListener("click", () => trackConversion(CONVERSION_LABEL_WHATSAPP, { event_category: "whatsapp", curso: COURSE }));
+  a.addEventListener("click", () => trackConversion(CFG.conversionLabelWhatsapp, { event_category: "whatsapp", curso: COURSE }));
 });
 
 /* ---------- Formulário ---------- */
@@ -140,20 +116,14 @@ if (form) {
     const label = $(".btn-label", btn);
     label.textContent = "Enviando…";
     try {
-      if (FORM_ENDPOINT) {
-        const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(data) });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      } else {
-        await new Promise((r) => setTimeout(r, 800));
-        console.info("[LíderTec] Envio simulado. Configure FORM_ENDPOINT em lp/lp.js.", data);
-      }
-      trackConversion(CONVERSION_LABEL_FORM, { event_category: "formulario", curso: COURSE });
+      await LT.sendLead(data);
+      trackConversion(CFG.conversionLabelForm, { event_category: "formulario", curso: COURSE });
       const first = data.nome.split(/\s+/)[0];
       $("#lp-success-name").textContent = first;
       const wa = $("#lp-success-wa");
       wa.href = waLink(`Olá! Sou ${data.nome}, de ${data.cidade_estado}. Tenho ${data.experiencia.toLowerCase()} de experiência e quero a certificação por competência em ${COURSE}. [${refCode}]`);
       wa.target = "_blank"; wa.rel = "noopener";
-      wa.addEventListener("click", () => trackConversion(CONVERSION_LABEL_WHATSAPP, { event_category: "whatsapp", curso: COURSE }), { once: true });
+      wa.addEventListener("click", () => trackConversion(CFG.conversionLabelWhatsapp, { event_category: "whatsapp", curso: COURSE }), { once: true });
       form.hidden = true;
       $("#lp-success").hidden = false;
       $("#lp-success").focus();

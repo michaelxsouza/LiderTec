@@ -350,7 +350,7 @@ kbd { display: inline-block; padding: 1px 7px; border-radius: 6px; border: 1px s
 .course-desc { font-size: .92rem; color: var(--gray-500); flex: 1; }
 .course-meta { display: flex; align-items: center; gap: 6px; font-size: .85rem; font-weight: 600; color: var(--navy); }
 .course-meta .ic { width: 16px; height: 16px; color: var(--magenta); }
-.course-card .btn { margin-top: 4px; width: 100%; padding: 11px 18px; }
+.course-card .btn { margin-top: 4px; width: 100%; padding: 11px 16px; }
 .course-card .btn-interest { background: var(--gray-50); color: var(--navy); border-color: var(--gray-100); }
 .course-card:hover .btn-interest, .course-card .btn-interest:focus-visible { background: var(--grad-pink); color: #fff; border-color: transparent; }
 .empty-state { display: grid; justify-items: center; gap: 14px; padding: 48px 16px; text-align: center; color: var(--gray-500); }
@@ -639,6 +639,46 @@ kbd { display: inline-block; padding: 1px 7px; border-radius: 6px; border: 1px s
   }
   .trust-bar { margin-top: -48px; }
 }
+
+
+/* ---------- Certificação por competência ---------- */
+.hero-link { display: inline-flex; align-items: center; gap: 8px; width: fit-content; font-family: var(--font-display); font-weight: 700; font-size: .92rem; color: var(--purple); text-decoration: none; border-bottom: 2px solid rgba(229,0,90,.3); padding-bottom: 2px; }
+.hero-link .ic { width: 16px; height: 16px; transition: transform .2s; }
+.hero-link:hover { color: var(--magenta); border-color: var(--magenta); }
+.hero-link:hover .ic { transform: translateX(3px); }
+
+.cc-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+.cc-copy { display: grid; gap: 20px; }
+.cc-quote { margin: 0; padding: 20px 24px; border-radius: 18px; background: var(--gray-50); border-left: 4px solid var(--magenta); }
+.cc-quote p { font-size: 1.02rem; font-style: italic; color: var(--navy); }
+.cc-quote cite { display: block; margin-top: 10px; font-style: normal; font-size: .82rem; font-weight: 700; color: var(--gray-500); letter-spacing: .02em; }
+.cc-note { display: flex; gap: 10px; align-items: flex-start; font-size: .92rem; color: #45445F; }
+.cc-note .ic { color: var(--magenta); margin-top: 3px; }
+.cc-side { display: grid; gap: 14px; }
+.cc-card { padding: 22px 24px; border-radius: 20px; border: 1px solid var(--gray-100); background: #fff; box-shadow: var(--shadow-sm); }
+.cc-card h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.cc-card h3 .ic { width: 28px; height: 28px; padding: 6px; border-radius: 50%; color: #fff; stroke-width: 3; }
+.cc-yes h3 .ic { background: var(--wa); }
+.cc-no { background: var(--gray-50); }
+.cc-no h3 .ic { background: var(--gray-500); }
+.cc-card ul { display: grid; gap: 8px; }
+.cc-card li { position: relative; padding-left: 18px; font-size: .95rem; color: #45445F; }
+.cc-card li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--magenta); }
+.cc-no li::before { background: var(--gray-500); }
+@media (max-width: 920px) { .cc-grid { grid-template-columns: minmax(0, 1fr); } }
+
+.catalog-note { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 14px; padding: 12px 16px; border-radius: 12px; background: #fff; border: 1px solid var(--gray-100); font-size: .9rem; color: #45445F; }
+.catalog-note .ic { color: var(--magenta); margin-top: 2px; width: 18px; height: 18px; }
+
+/* Cards: Tenho interesse + Saiba mais */
+.course-actions { display: grid; gap: 2px; margin-top: 4px; justify-items: center; }
+.course-actions .btn { margin-top: 0; }
+.course-more { display: inline-flex; align-items: center; gap: 4px; padding: 8px 6px 0; font-family: var(--font-display); font-weight: 700; font-size: .85rem; color: var(--purple); text-decoration: none; white-space: nowrap; }
+.course-more:hover { color: var(--magenta); text-decoration: underline; }
+.modal-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-family: var(--font-display); font-weight: 700; font-size: .88rem; color: var(--purple); text-decoration: none; }
+.modal-more .ic { width: 16px; height: 16px; }
+.modal-more:hover { color: var(--magenta); }
+.check a { color: var(--magenta); font-weight: 700; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

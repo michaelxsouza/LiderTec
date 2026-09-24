@@ -1,5 +1,12 @@
 import os
 SP="../../assets/img/icons.svg"
+
+# Endereço público do site (usado na prévia de compartilhamento). Troque se usar domínio próprio.
+SITE_URL = "https://michaelxsouza.github.io/LiderTec"
+
+# Requisitos exibidos em todas as páginas. Deixe a lista vazia até confirmar com a certificadora.
+# Exemplo: REQUISITOS = ["Experiência mínima de 2 anos na área", "Ensino médio completo"]
+REQUISITOS = []
 def I(i,cls="ic"): return f'<svg class="{cls}" aria-hidden="true"><use href="{SP}#{i}"/></svg>'
 
 # Gera as páginas de captura em lp/<curso>/index.html
@@ -11,17 +18,21 @@ def page(c):
     n=c["name"]
     faq=[
      ("O que é certificação por competência?", "É o reconhecimento formal dos conhecimentos que você adquiriu trabalhando. A Lei de Diretrizes e Bases da Educação (Lei 9.394/1996, art. 41) prevê que o conhecimento adquirido na educação profissional e tecnológica, inclusive no trabalho, pode ser avaliado, reconhecido e certificado."),
-     ("Quem pode fazer?", "Profissionais que já atuam na área. Requisitos: [INSERIR INFORMAÇÃO — tempo mínimo de experiência, escolaridade e comprovações aceitas]."),
+     ("Quem pode fazer?", f"Profissionais que já atuam ou atuaram na área de {n}. Os requisitos são confirmados por um consultor antes da inscrição."),
      ("Quanto tempo leva?", f"O curso de {n} está disponível {c['cats']}. O consultor informa os prazos de cada etapa."),
      ("O certificado é válido?", "Sim. A certificação é emitida por certificadora parceira regularizada no SISTEC/MEC, e o certificado é válido em todo o território nacional. Veja abaixo como consultar."),
      ("Consigo fazer o registro profissional?", c["registro"]),
-     ("Quais documentos preciso enviar?", "[INSERIR INFORMAÇÃO]"),
-     ("Quais são as formas de pagamento?", "[INSERIR INFORMAÇÃO]"),
+     ("Quais documentos preciso enviar?", "A lista de documentos depende do curso. O consultor informa tudo o que você precisa enviar."),
+     ("Quais são as formas de pagamento?", "As formas e condições de pagamento são informadas pelo consultor no atendimento."),
     ]
     faq_html="\n".join(f'''      <details class="faq-item">
         <summary>{q}{I("i-plus")}</summary>
         <div class="faq-body"><p>{a}</p></div>
       </details>''' for q,a in faq)
+    if REQUISITOS:
+        req_html = "      <ul>\n" + "\n".join(f'        <li>{I("i-check")} {r}</li>' for r in REQUISITOS) + "\n      </ul>"
+    else:
+        req_html = "      <p>Os requisitos, como tempo de experiência, escolaridade e comprovações, variam conforme o curso. Um consultor confere seu perfil com você antes da inscrição.</p>"
     prof="\n".join(f'          <li>{I("i-check")}<span>{p}</span></li>' for p in c["profiles"])
     return f'''<!DOCTYPE html>
 <html lang="pt-BR">
@@ -33,6 +44,19 @@ def page(c):
 <!-- Página de captura para anúncios: fora da busca orgânica -->
 <meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#15134F">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="LíderTec">
+<meta property="og:title" content="Certificação em {n} para quem já atua na área | LíderTec">
+<meta property="og:description" content="Certificação por competência em {n}, com certificadora parceira regularizada no SISTEC/MEC. Fale com um consultor.">
+<meta property="og:url" content="{SITE_URL}/lp/{c['slug']}/">
+<meta property="og:image" content="{SITE_URL}/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="../../assets/img/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
@@ -100,7 +124,7 @@ def page(c):
           <div class="field">
             <label class="check">
               <input type="checkbox" id="f-consent" name="consentimento">
-              <span>Autorizo o contato da LíderTec para receber informações sobre cursos e atendimento.</span>
+              <span>Autorizo o contato da LíderTec para receber informações sobre cursos e atendimento, conforme a <a href="../../politica-de-privacidade.html" target="_blank">Política de Privacidade</a>.</span>
             </label>
             <p class="field-error" id="e-consentimento"></p>
           </div>
@@ -136,11 +160,7 @@ def page(c):
     </div>
     <aside class="lp-req">
       <h3>Requisitos</h3>
-      <ul>
-        <li>{I("i-check")} [INSERIR INFORMAÇÃO — tempo mínimo de experiência na área]</li>
-        <li>{I("i-check")} [INSERIR INFORMAÇÃO — escolaridade exigida]</li>
-        <li>{I("i-check")} [INSERIR INFORMAÇÃO — documentos e comprovações aceitas]</li>
-      </ul>
+{req_html}
       <p class="note">Não sabe se seu perfil se encaixa? Um consultor avalia com você.</p>
       <a href="#" class="btn btn-wa" data-wa>{I("i-wa")} Tirar dúvida no WhatsApp</a>
     </aside>
@@ -233,7 +253,7 @@ def page(c):
 <footer class="lp-footer">
   <div class="container">
     <p>© <span id="year"></span> LíderTec – Cursos Técnicos e Educação Superior.</p>
-    <p>Certificadora parceira regularizada no SISTEC/MEC · <a href="../../index.html">Conheça todos os cursos</a></p>
+    <p>Certificadora parceira regularizada no SISTEC/MEC · <a href="../../index.html">Conheça todos os cursos</a> · <a href="../../politica-de-privacidade.html">Política de Privacidade</a></p>
   </div>
 </footer>
 
@@ -242,6 +262,7 @@ def page(c):
   <a href="#formulario" class="btn btn-primary">Receber informações</a>
 </div>
 
+<script src="../../assets/js/config.js"></script>
 <script src="../lp.js"></script>
 </body>
 </html>

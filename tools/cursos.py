@@ -16,10 +16,19 @@ AREA_ICON = {
     "servicos": "a-servicos", "educacao": "a-educacao",
 }
 
-C = "[CONFIRMAR COM A CERTIFICADORA]"
+# Registro profissional
+# ---------------------
+# O texto específico (com o nome do conselho) só aparece na página depois que você
+# CONFIRMAR com a certificadora que o certificado é aceito para o registro.
+# Para liberar, acrescente o nome do curso em REGISTRO_CONFIRMADO, por exemplo:
+#   REGISTRO_CONFIRMADO = {"Segurança do Trabalho", "Eletrotécnica"}
+REGISTRO_CONFIRMADO = set()
+
+REGISTRO_PADRAO = ("O registro profissional segue as regras do conselho ou órgão da sua área. "
+                   "Antes de se inscrever, confirme com um consultor se o certificado atende à exigência do seu registro.")
 def conselho(nome, orgao):
-    return f"O registro profissional de {nome} é feito no {orgao}, que segue regras próprias. {C}"
-GENERICO = f"Se a atuação exigir registro em conselho ou órgão profissional, valem as regras desse órgão. Tire suas dúvidas com um consultor antes de se inscrever. {C}"
+    return f"O registro profissional de {nome} é feito no {orgao}, que segue regras próprias."
+GENERICO = REGISTRO_PADRAO
 CRT = "Conselho Regional dos Técnicos Industriais (CRT)"
 CRTA = "Conselho Regional dos Técnicos Agrícolas (CRTA)"
 
@@ -95,6 +104,8 @@ DATA = {
 ORDER = ["CT", "IT", "SEI"]
 COURSES = []
 for nome, (area, cats, perfis, registro) in DATA.items():
+    if nome not in REGISTRO_CONFIRMADO:
+        registro = REGISTRO_PADRAO
     cats = sorted(cats, key=ORDER.index)
     txt = " e ".join(CAT[c] for c in cats).replace(" e na categoria", " e na categoria")
     slug = slugify(nome)

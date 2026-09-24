@@ -25,13 +25,17 @@ npm run dev
 
 O site abre em http://localhost:8000 e recarrega sozinho quando você salva um arquivo.
 
-## 1. Configurações rápidas (`assets/js/main.js`, no topo)
+## 1. Configurações rápidas (`assets/js/config.js`)
 
-| Variável | O que faz |
+Um único arquivo vale para o site principal e para as 65 páginas de captura.
+
+| Configuração | O que faz |
 |---|---|
 | `whatsappNumber` | Número usado em todos os botões de WhatsApp (DDI + DDD + número, só dígitos). |
-| `FORM_ENDPOINT` | Endereço que recebe o formulário. Vazio = envio simulado. |
-| `PAGE_SIZE` | Quantos cursos aparecem antes do botão "Ver mais cursos". |
+| `formEndpoint` | Para onde os formulários são enviados. Vazio = envio simulado (nada chega). Veja a seção 5. |
+| `googleAdsId`, `conversionLabelForm`, `conversionLabelWhatsapp` | Tag e conversões do Google Ads (opcional). |
+
+Se algum texto com `[INSERIR` ou `[CONFIRMAR` ficar na página por engano, o site o esconde automaticamente e avisa no console do navegador (F12).
 
 ## 2. Logo
 
@@ -57,47 +61,59 @@ Todos os cursos estão no objeto `COURSES` em `main.js`, separados por categoria
 - `desc` é opcional. Sem ela, o card mostra a descrição geral da área (objeto `AREAS`).
 - `duracao` é opcional e só deve ser preenchida quando confirmada. Sem ela, o card mostra apenas a categoria.
 
-## 5. Formulário de contato
+## 5. Receber os contatos (formulário)
 
-O formulário já valida os campos, aplica máscara no WhatsApp, bloqueia envio vazio e tem um campo oculto anti-spam (honeypot). Sem backend, o envio é simulado e os dados aparecem no console do navegador.
+Enquanto `formEndpoint` estiver vazio em `assets/js/config.js`, o envio é **simulado**: o visitante vê "Mensagem enviada", mas nada chega. Escolha uma das opções:
 
-Para receber os contatos de verdade, preencha `FORM_ENDPOINT` com um endereço que aceite `POST` em JSON. Opções:
+### Opção A – Planilha Google (recomendada, gratuita)
 
-**Formspree (mais simples, sem programar)**
+Os contatos caem numa planilha e, se quiser, você recebe um e-mail a cada contato.
+
+1. Acesse sheets.google.com e crie uma planilha em branco (ex.: "Contatos LíderTec").
+2. Menu **Extensões → Apps Script**.
+3. Apague o código de exemplo e cole todo o conteúdo de `tools/google-apps-script.gs`.
+4. (Opcional) No início do código, preencha `EMAIL_AVISO` com o e-mail que deve receber avisos.
+5. Clique em **Implantar → Nova implantação**. Em "Tipo", escolha **App da Web**.
+   - Executar como: **Eu**
+   - Quem pode acessar: **Qualquer pessoa**
+6. Clique em **Implantar** e autorize o acesso com sua conta Google (o Google mostra um aviso de "app não verificado": clique em *Avançado → Acessar*).
+7. Copie a **URL do app da Web** (termina em `/exec`) e cole em `formEndpoint` no `assets/js/config.js`:
+   ```js
+   formEndpoint: "https://script.google.com/macros/s/XXXXXXXX/exec",
+   ```
+8. Envie as alterações ao GitHub e faça um envio de teste pelo site. Uma aba "Contatos" aparece na planilha com o primeiro registro.
+
+Se você alterar o código do Apps Script depois, use **Implantar → Gerenciar implantações → Editar → Nova versão** para manter a mesma URL.
+
+### Opção B – Formspree (sem planilha, chega por e-mail)
+
 1. Crie uma conta em formspree.io e um novo formulário.
-2. Copie o endereço gerado (ex.: `https://formspree.io/f/abcdwxyz`) para `FORM_ENDPOINT`.
-3. Os contatos chegam por e-mail.
+2. Copie o endereço gerado (ex.: `https://formspree.io/f/abcdwxyz`) para `formEndpoint`.
+3. Confirme o e-mail de ativação que o Formspree envia no primeiro contato recebido.
 
-**Google Planilhas (Apps Script)**
-1. Crie uma planilha e abra *Extensões → Apps Script*.
-2. Cole uma função `doPost(e)` que leia `JSON.parse(e.postData.contents)` e grave uma linha com `appendRow`.
-3. Publique como *App da Web* (acesso: qualquer pessoa) e use o endereço gerado em `FORM_ENDPOINT`.
-   Observação: o Apps Script pode exigir `Content-Type: text/plain` para evitar bloqueio de CORS; nesse caso troque o cabeçalho no `fetch` de `main.js`.
+O plano gratuito do Formspree tem limite mensal de envios.
 
-**Backend próprio (PHP, Node etc.)**
-O site envia este JSON:
+### Dados enviados
 
-```json
-{
-  "nome": "…", "whatsapp": "31999999999", "email": "…",
-  "cidade_estado": "…", "curso": "Enfermagem (2 a 7 dias · Competência SEI)",
-  "mensagem": "…", "consentimento": true, "origem": "site", "enviado_em": "ISO-8601"
-}
-```
+`nome`, `whatsapp`, `email` (site principal), `cidade_estado`, `curso`, `experiencia` (páginas de captura), `mensagem`, `referencia`, `origem`, `pagina`, `utm_*`, `gclid`, `consentimento`, `enviado_em`.
 
-Responda com status 200 para sucesso. Qualquer outro status mostra uma mensagem de erro ao visitante, sugerindo o WhatsApp.
+## 6. Informações que ainda faltam
 
-## 6. Informações a preencher antes de publicar
+Os pontos sem informação confirmada foram escondidos ou reescritos sem o dado. Quando tiver as informações:
 
-Procure por `[INSERIR` no `index.html` para encontrar todos os pontos:
+- **Depoimentos:** a seção está oculta. Preencha os três cards em `index.html` e remova o atributo `hidden` de `<section id="depoimentos">`.
+- **E-mail, endereço, horário e CNPJ:** estão comentados em `index.html` (contato e rodapé). Descomente e preencha.
+- **História da LíderTec:** há um comentário na seção "Sobre" indicando onde incluir.
+- **Política de Privacidade:** acrescente razão social, CNPJ e e-mail em `politica-de-privacidade.html` (há um comentário no item 1). O texto é um modelo; vale revisão de um advogado.
+- **Páginas de captura:** requisitos (`REQUISITOS` em `tools/gerar_paginas.py`) e registro profissional (`REGISTRO_CONFIRMADO` em `tools/cursos.py`). Depois rode `python tools/gerar_paginas.py`.
+- **Logo oficial:** veja a seção 2.
 
-- História, missão e diferenciais (seção Sobre)
-- Reconhecimento MEC/SISTEC: já preenchido com os códigos 45630 (Parauapebas – PA) e 61295 (Redenção – PA). Confira no SISTEC antes de publicar.
-- Regras para emissão do certificado (FAQ)
-- Respostas do FAQ: matrícula, certificado, duração, horário, pagamento e documentos
-- E-mail, endereço, horário de atendimento e CNPJ
-- Três depoimentos reais, com autorização dos alunos
-- Logo oficial
+## 6.1 Prévia no WhatsApp e ícone do site
+
+- Imagem de compartilhamento: `assets/img/og-image.jpg` (1200 × 630).
+- Ícones: `assets/img/favicon-32.png`, `favicon-192.png` e `apple-touch-icon.png`.
+- As tags usam o endereço `https://michaelxsouza.github.io/LiderTec`. Se passar a usar domínio próprio, troque esse endereço no `<head>` do `index.html` e em `SITE_URL` no `tools/gerar_paginas.py` (depois rode o gerador).
+- O WhatsApp guarda a prévia em cache. Para testar uma mudança, envie o link com `?v=2` no final.
 
 ## 7. Cores
 
@@ -118,7 +134,7 @@ Existe uma página por curso (65 no total), sem menu, com formulário e WhatsApp
 
 - **Lista de todas as páginas:** abra `/lp/` no navegador, ou `lp/paginas.csv` no Excel (tem a URL final de cada curso para colar no Google Ads).
 - **Código no WhatsApp:** cada mensagem chega com o código do curso, ex.: `[LP-SEGURANCA-DO-TRABALHO-GADS]`. O sufixo `-GADS` aparece quando o visitante veio de anúncio do Google (`gclid` ou `utm_source=google`).
-- **Configurações em `lp/lp.js`:** `whatsappNumber`, `FORM_ENDPOINT` (recebe também `experiencia`, `referencia`, `pagina`, `utm_*` e `gclid`), `GOOGLE_ADS_ID`, `CONVERSION_LABEL_FORM` e `CONVERSION_LABEL_WHATSAPP`.
+- **Configurações:** as mesmas do site principal, em `assets/js/config.js`.
 
 ### Editar as páginas (sem mexer em 65 arquivos)
 
@@ -131,4 +147,4 @@ As páginas são geradas por um script. Edite e rode de novo:
 python tools/gerar_paginas.py
 ```
 
-**Antes de rodar anúncios:** preencha os `[INSERIR INFORMAÇÃO]` (requisitos, documentos, pagamento) em `tools/gerar_paginas.py` e confirme os textos marcados com `[CONFIRMAR COM A CERTIFICADORA]` em `tools/cursos.py`. Depois gere as páginas de novo.
+**Antes de rodar anúncios:** configure o envio do formulário (seção 5) e, quando tiver, preencha `REQUISITOS` em `tools/gerar_paginas.py` e `REGISTRO_CONFIRMADO` em `tools/cursos.py`. Depois gere as páginas de novo.

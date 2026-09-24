@@ -2,14 +2,11 @@
    LíderTec – scripts do site
    ========================================================= */
 
-/* ---------------- CONFIGURAÇÕES EDITÁVEIS ---------------- */
-
-// Número do WhatsApp (DDI + DDD + número, só dígitos)
-const whatsappNumber = "553171942302";
-
-// Endereço para onde o formulário será enviado (POST em JSON).
-// Deixe vazio para simular o envio. Veja o README.md para opções de integração.
-const FORM_ENDPOINT = "";
+/* ---------------- CONFIGURAÇÕES ----------------
+   WhatsApp, envio do formulário e Google Ads ficam em assets/js/config.js */
+const CFG = window.LIDERTEC_CONFIG || {};
+const whatsappNumber = CFG.whatsappNumber || "553171942302";
+const LT = window.LiderTec || { sendLead: async () => ({ simulated: true }), track: () => {} };
 
 // Quantos cursos exibir antes do botão "Ver mais cursos"
 const PAGE_SIZE = 12;
@@ -23,16 +20,16 @@ const CATEGORIES = {
 
 /* ---------------- ÁREAS (ícone + descrição padrão editável) ---------------- */
 const AREAS = {
-  saude:      { label: "Saúde e bem-estar",           desc: "Formação para quem deseja atuar em atividades ligadas à saúde, ao cuidado e ao bem-estar." },
-  gestao:     { label: "Gestão e negócios",           desc: "Formação voltada a rotinas de gestão, negócios, atendimento e organização de empresas." },
-  tecnologia: { label: "Tecnologia e comunicação",    desc: "Formação para quem se interessa por tecnologia, sistemas, redes e comunicação digital." },
-  industria:  { label: "Indústria e manutenção",      desc: "Formação ligada a processos industriais, manutenção, equipamentos e produção." },
-  agro:       { label: "Agro e meio ambiente",        desc: "Formação voltada ao campo, à produção agropecuária e às questões ambientais." },
-  construcao: { label: "Construção e infraestrutura", desc: "Formação ligada a projetos, medições e obras de construção e infraestrutura." },
-  seguranca:  { label: "Segurança e proteção",        desc: "Formação voltada à prevenção de riscos, à proteção de pessoas e à segurança coletiva." },
-  design:     { label: "Design e criação",            desc: "Formação para quem gosta de criar, planejar ambientes e desenvolver comunicação visual." },
-  servicos:   { label: "Turismo, eventos e serviços", desc: "Formação para atuar em turismo, eventos, gastronomia e atendimento ao público." },
-  educacao:   { label: "Educação e humanidades",      desc: "Formação ligada à educação, à comunicação e ao apoio a instituições e comunidades." },
+  saude:      { label: "Saúde e bem-estar",           desc: "Para quem já atua em atividades ligadas à saúde, ao cuidado e ao bem-estar." },
+  gestao:     { label: "Gestão e negócios",           desc: "Para quem já atua em rotinas de gestão, negócios, atendimento e organização de empresas." },
+  tecnologia: { label: "Tecnologia e comunicação",    desc: "Para quem já atua com tecnologia, sistemas, redes e comunicação digital." },
+  industria:  { label: "Indústria e manutenção",      desc: "Para quem já atua em processos industriais, manutenção, equipamentos e produção." },
+  agro:       { label: "Agro e meio ambiente",        desc: "Para quem já atua no campo, na produção agropecuária ou com questões ambientais." },
+  construcao: { label: "Construção e infraestrutura", desc: "Para quem já atua com projetos, medições e obras de construção e infraestrutura." },
+  seguranca:  { label: "Segurança e proteção",        desc: "Para quem já atua na prevenção de riscos e na proteção de pessoas." },
+  design:     { label: "Design e criação",            desc: "Para quem já atua criando, planejando ambientes ou desenvolvendo comunicação visual." },
+  servicos:   { label: "Turismo, eventos e serviços", desc: "Para quem já atua com turismo, eventos, gastronomia e atendimento ao público." },
+  educacao:   { label: "Educação e humanidades",      desc: "Para quem já atua com educação, comunicação ou apoio a instituições e comunidades." },
 };
 
 /* ---------------- CURSOS ----------------
@@ -138,6 +135,8 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&
 const ALL = Object.entries(COURSES).flatMap(([cat, list]) =>
   list.map((c, i) => ({ ...c, cat, id: `${cat}-${i}`, key: norm(c.n) }))
 );
+const slugify = (s) => norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const lpUrl = (c) => `lp/${slugify(c.n)}/`;
 const courseLabel = (c) => `${c.n} (${CATEGORIES[c.cat].label} · ${CATEGORIES[c.cat].competencia})`;
 
 /* ---------- WhatsApp ---------- */
@@ -157,6 +156,7 @@ function wireWhatsApp(root = document) {
     a.href = waLink(a.dataset.wa);
     a.target = "_blank";
     a.rel = "noopener";
+    a.addEventListener("click", () => LT.track(CFG.conversionLabelWhatsapp, { event_category: "whatsapp" }));
   });
   $$(".wa-display").forEach((el) => (el.textContent = formatPhone(whatsappNumber)));
 }
@@ -267,7 +267,10 @@ function cardHTML(c) {
     <h3>${esc(c.n)}</h3>
     <p class="course-desc">${esc(c.desc || area.desc)}</p>
     ${c.duracao ? `<p class="course-meta"><svg class="ic"><use href="#i-clock"/></svg>Duração: ${esc(c.duracao)}</p>` : ""}
-    <button type="button" class="btn btn-interest" data-course="${c.id}">Tenho interesse <svg class="ic"><use href="#i-arrow"/></svg></button>
+    <div class="course-actions">
+      <button type="button" class="btn btn-interest" data-course="${c.id}">Tenho interesse <svg class="ic"><use href="#i-arrow"/></svg></button>
+      <a class="course-more" href="${lpUrl(c)}" aria-label="Saiba mais sobre ${esc(c.n)}">Saiba mais</a>
+    </div>
   </article>`;
 }
 
@@ -308,6 +311,8 @@ function openInterest(id) {
   const wa = $("#modal-wa");
   wa.href = waLink(`Olá! Tenho interesse no curso de ${c.n} (${cat.label} – ${cat.competencia}). Gostaria de mais informações.`);
   wa.target = "_blank"; wa.rel = "noopener";
+  $("#modal-more").href = lpUrl(c);
+  $("#modal-more-name").textContent = c.n;
 
   const dlg = $("#interest-modal");
   if (typeof dlg.showModal === "function") dlg.showModal();
@@ -413,6 +418,8 @@ function initForm() {
       mensagem: f.mensagem.value.trim(),
       consentimento: true,
       origem: "site",
+      pagina: location.pathname,
+      ...(() => { const q = new URLSearchParams(location.search), o = {}; ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid"].forEach((k) => { if (q.get(k)) o[k] = q.get(k); }); return o; })(),
       enviado_em: new Date().toISOString(),
     };
 
@@ -420,18 +427,8 @@ function initForm() {
     btn.disabled = true;
     $(".btn-label", btn).textContent = "Enviando…";
     try {
-      if (FORM_ENDPOINT) {
-        const res = await fetch(FORM_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(data),
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      } else {
-        // Simulação (sem backend configurado)
-        await new Promise((r) => setTimeout(r, 900));
-        console.info("[LíderTec] Envio simulado. Configure FORM_ENDPOINT em assets/js/main.js.", data);
-      }
+      await LT.sendLead(data);
+      LT.track(CFG.conversionLabelForm, { event_category: "formulario", curso: data.curso });
       showSuccess(data.nome, data);
     } catch (err) {
       console.error(err);
