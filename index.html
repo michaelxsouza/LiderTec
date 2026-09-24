@@ -39,6 +39,7 @@
     <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
     <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
     <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
     <!-- áreas -->
     <symbol id="a-saude" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/><path d="M3.2 12h5.3l1.5-3 3 6 1.5-3h6.3"/></symbol>
@@ -143,8 +144,8 @@
         <span class="official-ic"><svg class="ic"><use href="#i-filecheck"/></svg></span>
         <div>
           <strong>Registro e reconhecimento</strong>
-          <!-- Inclua aqui apenas dados oficiais confirmados pela instituição (órgão, número de registro, link de consulta). -->
-          <p>[INSERIR INFORMAÇÃO OFICIAL]</p>
+          <p>A certificação é emitida por instituição parceira regularizada no SISTEC/MEC.</p>
+          <a href="#reconhecimento" class="official-link">Veja como verificar <svg class="ic"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
     </div>
@@ -170,6 +171,59 @@
         <h3>Atendimento personalizado</h3>
         <p>Um consultor ajuda você a entender as opções e escolher o curso.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RECONHECIMENTO MEC/SISTEC ================= -->
+<!-- Dados informados pela LíderTec. Confira os códigos no SISTEC antes de publicar. -->
+<section class="section section-recon" id="reconhecimento">
+  <div class="container">
+    <div class="recon-panel">
+      <div class="recon-copy">
+        <p class="eyebrow">Reconhecimento MEC/SISTEC</p>
+        <h2>Consulte nossa regularidade no SISTEC</h2>
+        <p class="lead">Nossa certificadora parceira é regularizada no SISTEC, o Sistema Nacional de Informações da Educação Profissional e Tecnológica do MEC. Por isso, o certificado é válido em todo o território nacional.</p>
+        <div class="btn-row">
+          <a href="https://sistec.mec.gov.br/consultapublicaunidadeensino/" class="btn btn-primary" target="_blank" rel="noopener">
+            Consultar no SISTEC <svg class="ic"><use href="#i-external"/></svg>
+          </a>
+        </div>
+        <p class="recon-tip"><svg class="ic"><use href="#a-tecnologia"/></svg> Dica: faça a consulta pelo computador para facilitar.</p>
+      </div>
+
+      <div class="recon-side">
+        <div class="unit-list">
+          <article class="unit-card">
+            <span class="unit-tag">Matriz</span>
+            <h3>Sistema Integrado de Ensino</h3>
+            <dl>
+              <div><dt>Código SISTEC</dt><dd>45630</dd></div>
+              <div><dt>Município</dt><dd>Parauapebas – PA</dd></div>
+            </dl>
+          </article>
+          <article class="unit-card">
+            <span class="unit-tag">Unidade</span>
+            <h3>Colégio Técnico Universal Tec</h3>
+            <dl>
+              <div><dt>Código SISTEC</dt><dd>61295</dd></div>
+              <div><dt>Município</dt><dd>Redenção – PA</dd></div>
+            </dl>
+          </article>
+        </div>
+
+        <div class="recon-steps">
+          <h3>Passo a passo</h3>
+          <ol>
+            <li>Acesse <a href="https://sistec.mec.gov.br/consultapublicaunidadeensino/" target="_blank" rel="noopener">sistec.mec.gov.br/consultapublicaunidadeensino</a>.</li>
+            <li>Selecione o estado do <strong>Pará</strong>.</li>
+            <li>Selecione o município da unidade: <strong>Parauapebas</strong> ou <strong>Redenção</strong>.</li>
+            <li>Aperte <kbd>Ctrl</kbd> + <kbd>F</kbd> para abrir o localizador do navegador.</li>
+            <li>Digite o código da escola (<strong>45630</strong> ou <strong>61295</strong>) ou o nome da instituição.</li>
+            <li>Confira a lista de cursos autorizados.</li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -344,7 +398,7 @@
       </details>
       <details class="faq-item">
         <summary>Os cursos possuem certificado?<svg class="ic"><use href="#i-plus"/></svg></summary>
-        <div class="faq-body"><p>[INSERIR INFORMAÇÃO OFICIAL] sobre certificação e as regras da instituição para sua emissão.</p></div>
+        <div class="faq-body"><p>Sim. A certificação é emitida por instituição parceira regularizada no SISTEC/MEC e é válida em todo o território nacional. Veja como conferir na seção <a href="#reconhecimento">Reconhecimento MEC/SISTEC</a>. Regras para emissão: [INSERIR INFORMAÇÃO].</p></div>
       </details>
       <details class="faq-item">
         <summary>Qual é a duração dos cursos?<svg class="ic"><use href="#i-plus"/></svg></summary>
@@ -482,7 +536,8 @@
       <h4>Institucional</h4>
       <ul>
         <li>CNPJ: [INSERIR INFORMAÇÃO]</li>
-        <li>Registro: [INSERIR INFORMAÇÃO OFICIAL]</li>
+        <li><a href="#reconhecimento">Reconhecimento MEC/SISTEC</a></li>
+        <li>Códigos SISTEC: 45630 e 61295</li>
       </ul>
     </div>
   </div>

@@ -96,7 +96,8 @@ Responda com status 200 para sucesso. Qualquer outro status mostra uma mensagem 
 Procure por `[INSERIR` no `index.html` para encontrar todos os pontos:
 
 - História, missão e diferenciais (seção Sobre)
-- Registro e reconhecimento oficial (seção Sobre e rodapé). A arte de divulgação menciona o SISTEC; inclua somente depois de confirmar os dados oficiais (órgão, número de registro, link de consulta).
+- Reconhecimento MEC/SISTEC: já preenchido com os códigos 45630 (Parauapebas – PA) e 61295 (Redenção – PA). Confira no SISTEC antes de publicar.
+- Regras para emissão do certificado (FAQ)
 - Respostas do FAQ: matrícula, certificado, duração, horário, pagamento e documentos
 - E-mail, endereço, horário de atendimento e CNPJ
 - Três depoimentos reais, com autorização dos alunos
