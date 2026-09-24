@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LíderTec Cursos Técnicos</title>
+<meta name="description" content="LíderTec – Cursos Técnicos e Educação Superior. Encontre o curso ideal e fale com um consultor.">
+<meta name="theme-color" content="#15134F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ================= ÍCONES (sprite SVG) ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/><path d="M22 10v6"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-headset" viewBox="0 0 24 24"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M10 11H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5c0 3-1.5 5-4 6"/><path d="M19 11h-4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5c0 3-1.5 5-4 6"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z"/><path d="M19 3v4M17 5h4"/></symbol>
+    <symbol id="i-filecheck" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <!-- áreas -->
+    <symbol id="a-saude" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/><path d="M3.2 12h5.3l1.5-3 3 6 1.5-3h6.3"/></symbol>
+    <symbol id="a-gestao" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></symbol>
+    <symbol id="a-tecnologia" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M9 8l-2 2 2 2M15 8l2 2-2 2"/></symbol>
+    <symbol id="a-industria" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="a-agro" viewBox="0 0 24 24"><path d="M7 20h10M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
+    <symbol id="a-construcao" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></symbol>
+    <symbol id="a-seguranca" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="a-design" viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></symbol>
+    <symbol id="a-servicos" viewBox="0 0 24 24"><path d="M3 11h18M5 11a7 7 0 0 1 14 0M12 4V2M2 15h20M6 19h12"/></symbol>
+    <symbol id="a-educacao" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- ================= 1. CABEÇALHO ================= -->
+<header class="site-header" id="topo">
+  <div class="container header-inner">
+    <a href="#inicio" class="brand" aria-label="LíderTec – página inicial">
+      <!-- LOGO: substitua pelo arquivo oficial (PNG ou SVG) em assets/img/.
+           O arquivo atual foi recortado do material de divulgação e é PROVISÓRIO. -->
+      <img src="assets/img/logo-lidertec-provisorio.png" alt="LíderTec – Cursos Técnicos e Educação Superior" width="190" height="45">
+    </a>
+
+    <nav class="main-nav" id="main-nav" aria-label="Menu principal">
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre a LíderTec</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#beneficios">Benefícios</a></li>
+        <li><a href="#faq">Dúvidas frequentes</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+      <a href="#" class="btn btn-primary nav-cta-mobile" data-wa="Olá! Gostaria de falar com um consultor da LíderTec.">
+        <svg class="ic"><use href="#i-wa"/></svg> Falar com um consultor
+      </a>
+    </nav>
+
+    <a href="#" class="btn btn-primary header-cta" data-wa="Olá! Gostaria de falar com um consultor da LíderTec.">
+      <svg class="ic"><use href="#i-headset"/></svg> Falar com um consultor
+    </a>
+
+    <button class="menu-toggle" id="menu-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Abrir menu">
+      <svg class="ic ic-open"><use href="#i-menu"/></svg>
+      <svg class="ic ic-close"><use href="#i-x"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ================= 2. HERO ================= -->
+<section class="hero" id="inicio">
+  <div class="hero-swoosh" aria-hidden="true"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow"><svg class="ic"><use href="#i-cap"/></svg> Cursos técnicos e profissionalizantes</p>
+      <h1>Transforme seu futuro com uma <span class="grad-text">formação profissional</span> de verdade</h1>
+      <p class="lead">Encontre o curso ideal para ampliar suas oportunidades, desenvolver novas habilidades e dar o próximo passo na sua carreira.</p>
+      <div class="btn-row">
+        <a href="#cursos" class="btn btn-primary btn-lg">Ver cursos disponíveis <svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a href="#" class="btn btn-wa btn-lg" data-wa="Olá! Vim pelo site e gostaria de saber mais sobre os cursos da LíderTec.">
+          <svg class="ic"><use href="#i-wa"/></svg> Falar pelo WhatsApp
+        </a>
+      </div>
+      <ul class="trust-list">
+        <li><svg class="ic"><use href="#i-check"/></svg> Cursos técnicos e profissionalizantes</li>
+        <li><svg class="ic"><use href="#i-check"/></svg> Formação voltada ao mercado de trabalho</li>
+        <li><svg class="ic"><use href="#i-check"/></svg> Atendimento personalizado</li>
+        <li><svg class="ic"><use href="#i-check"/></svg> Opções de cursos em diferentes áreas</li>
+      </ul>
+    </div>
+
+    <!-- Composição de profissionais. Cada .photo-slot é um espaço reservado para foto oficial.
+         Para substituir: coloque <img src="assets/img/hero-1.jpg" alt="..."> dentro do figure
+         e remova o conteúdo .slot-placeholder. -->
+    <div class="hero-visual" aria-label="Profissionais de diferentes áreas">
+      <figure class="photo-slot tall s1"><div class="slot-placeholder"><svg class="ic"><use href="#a-gestao"/></svg><span>Foto oficial<br>Gestão</span></div></figure>
+      <figure class="photo-slot tall s2"><div class="slot-placeholder"><svg class="ic"><use href="#a-seguranca"/></svg><span>Foto oficial<br>Segurança do Trabalho</span></div></figure>
+      <figure class="photo-slot tall s3"><div class="slot-placeholder"><svg class="ic"><use href="#a-saude"/></svg><span>Foto oficial<br>Saúde</span></div></figure>
+      <figure class="photo-slot tall s4"><div class="slot-placeholder"><svg class="ic"><use href="#a-industria"/></svg><span>Foto oficial<br>Indústria</span></div></figure>
+      <div class="float-chip chip-a"><span class="chip-ic"><svg class="ic"><use href="#i-award"/></svg></span><span><strong>Formação profissional</strong><small>Diversas áreas de atuação</small></span></div>
+      <div class="float-chip chip-b"><span class="chip-ic wa"><svg class="ic"><use href="#i-wa"/></svg></span><span><strong>Atendimento</strong><small>Fale com um consultor</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. SOBRE ================= -->
+<section class="section" id="sobre">
+  <div class="container about-grid">
+    <div class="about-copy">
+      <p class="eyebrow">Sobre a LíderTec</p>
+      <h2>Educação que prepara você para novas oportunidades</h2>
+      <p class="lead">A LíderTec oferece cursos voltados ao desenvolvimento profissional, com opções para diferentes áreas de atuação e objetivos de carreira.</p>
+      <p class="muted">[INSERIR INFORMAÇÃO] — história, missão e diferenciais da instituição.</p>
+
+      <div class="official-box">
+        <span class="official-ic"><svg class="ic"><use href="#i-filecheck"/></svg></span>
+        <div>
+          <strong>Registro e reconhecimento</strong>
+          <!-- Inclua aqui apenas dados oficiais confirmados pela instituição (órgão, número de registro, link de consulta). -->
+          <p>[INSERIR INFORMAÇÃO OFICIAL]</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature">
+        <span class="feature-ic"><svg class="ic"><use href="#i-cap"/></svg></span>
+        <h3>Formação profissional</h3>
+        <p>Cursos pensados para quem quer se qualificar e se preparar para o mercado de trabalho.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-ic"><svg class="ic"><use href="#i-layers"/></svg></span>
+        <h3>Cursos em diversas áreas</h3>
+        <p>Saúde, gestão, tecnologia, indústria, agro, construção e muito mais.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-ic"><svg class="ic"><use href="#i-cal"/></svg></span>
+        <h3>Flexibilidade</h3>
+        <p>Categorias com diferentes durações para se adequar ao seu momento.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-ic"><svg class="ic"><use href="#i-headset"/></svg></span>
+        <h3>Atendimento personalizado</h3>
+        <p>Um consultor ajuda você a entender as opções e escolher o curso.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4. CURSOS ================= -->
+<section class="section section-tint" id="cursos">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Cursos</p>
+      <h2>Escolha a área que combina com seus objetivos</h2>
+      <p class="lead">Filtre por categoria ou área, ou pesquise pelo nome do curso.</p>
+    </div>
+
+    <div class="catalog-tools">
+      <div class="cat-tabs" role="tablist" aria-label="Categorias de cursos" id="cat-tabs"></div>
+      <div class="catalog-filters">
+        <label class="search-field">
+          <svg class="ic"><use href="#i-search"/></svg>
+          <span class="sr-only">Pesquisar curso</span>
+          <input type="search" id="course-search" placeholder="Pesquisar curso pelo nome" autocomplete="off">
+        </label>
+        <label class="select-field">
+          <span class="sr-only">Filtrar por área</span>
+          <select id="area-filter"></select>
+        </label>
+      </div>
+    </div>
+
+    <p class="result-count" id="result-count" aria-live="polite"></p>
+    <div class="course-grid" id="course-grid"></div>
+    <div class="empty-state" id="empty-state" hidden>
+      <svg class="ic"><use href="#i-search"/></svg>
+      <p><strong>Nenhum curso encontrado.</strong> Tente outro nome ou limpe os filtros.</p>
+      <button type="button" class="btn btn-outline" id="clear-filters">Limpar filtros</button>
+    </div>
+    <div class="load-more-wrap">
+      <button type="button" class="btn btn-outline" id="load-more" hidden>Ver mais cursos</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. COMO FUNCIONA ================= -->
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="section-head center">
+      <p class="eyebrow">Como funciona</p>
+      <h2>Do primeiro contato ao início da sua formação</h2>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <span class="step-num">1</span>
+        <span class="step-ic"><svg class="ic"><use href="#i-search"/></svg></span>
+        <h3>Escolha o curso</h3>
+        <p>Explore as categorias e encontre a área que combina com você.</p>
+      </li>
+      <li class="step">
+        <span class="step-num">2</span>
+        <span class="step-ic"><svg class="ic"><use href="#i-chat"/></svg></span>
+        <h3>Fale com um consultor</h3>
+        <p>Tire suas dúvidas pelo WhatsApp ou pelo formulário de contato.</p>
+      </li>
+      <li class="step">
+        <span class="step-num">3</span>
+        <span class="step-ic"><svg class="ic"><use href="#i-compass"/></svg></span>
+        <h3>Receba as orientações</h3>
+        <p>Conheça as etapas, os documentos e as condições para a matrícula.</p>
+      </li>
+      <li class="step">
+        <span class="step-num">4</span>
+        <span class="step-ic"><svg class="ic"><use href="#i-rocket"/></svg></span>
+        <h3>Comece sua formação</h3>
+        <p>Com tudo organizado, é hora de iniciar os estudos.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= 6. BENEFÍCIOS ================= -->
+<section class="section section-dark" id="beneficios">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow on-dark">Benefícios</p>
+      <h2>Por que estudar na LíderTec</h2>
+    </div>
+    <div class="benefit-grid">
+      <article class="benefit"><svg class="ic"><use href="#i-layers"/></svg><h3>Cursos em diferentes áreas profissionais</h3></article>
+      <article class="benefit"><svg class="ic"><use href="#i-headset"/></svg><h3>Atendimento personalizado</h3></article>
+      <article class="benefit"><svg class="ic"><use href="#i-route"/></svg><h3>Processo simples para conhecer os cursos</h3></article>
+      <article class="benefit"><svg class="ic"><use href="#i-clock"/></svg><h3>Opções de formação de curta duração</h3></article>
+      <article class="benefit"><svg class="ic"><use href="#i-compass"/></svg><h3>Orientação para escolher o curso</h3></article>
+      <article class="benefit"><svg class="ic"><use href="#i-spark"/></svg><h3>Desenvolvimento de novas habilidades</h3></article>
+      <article class="benefit"><svg class="ic"><use href="#i-trend"/></svg><h3>Formação voltada ao crescimento profissional</h3></article>
+      <article class="benefit"><svg class="ic"><use href="#i-award"/></svg><h3>Certificação conforme as regras da instituição</h3></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. DESTAQUE ================= -->
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-band">
+      <div class="cta-deco" aria-hidden="true"><svg class="ic"><use href="#i-cap"/></svg></div>
+      <div class="cta-copy">
+        <h2>Dê o próximo passo na sua carreira</h2>
+        <p>Invista em conhecimento, fortaleça seu currículo e conquiste novas oportunidades profissionais.</p>
+      </div>
+      <div class="btn-row">
+        <a href="#cursos" class="btn btn-light btn-lg">Conhecer os cursos</a>
+        <a href="#" class="btn btn-ghost-light btn-lg" data-wa="Olá! Gostaria de falar com um consultor da LíderTec.">
+          <svg class="ic"><use href="#i-wa"/></svg> Falar com um consultor
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. DEPOIMENTOS ================= -->
+<section class="section" id="depoimentos">
+  <div class="container">
+    <div class="section-head center">
+      <p class="eyebrow">Depoimentos</p>
+      <h2>Quem estudou na LíderTec</h2>
+    </div>
+    <!-- Substitua cada card por um depoimento real, com autorização do aluno. -->
+    <div class="testimonial-grid">
+      <figure class="testimonial">
+        <svg class="ic quote-ic"><use href="#i-quote"/></svg>
+        <p class="placeholder-flag">Depoimento real do aluno — substituir antes da publicação.</p>
+        <blockquote>[INSERIR DEPOIMENTO]</blockquote>
+        <figcaption><span class="avatar"><svg class="ic"><use href="#i-user"/></svg></span><span><strong>[NOME DO ALUNO]</strong><small>[CURSO]</small></span></figcaption>
+      </figure>
+      <figure class="testimonial">
+        <svg class="ic quote-ic"><use href="#i-quote"/></svg>
+        <p class="placeholder-flag">Depoimento real do aluno — substituir antes da publicação.</p>
+        <blockquote>[INSERIR DEPOIMENTO]</blockquote>
+        <figcaption><span class="avatar"><svg class="ic"><use href="#i-user"/></svg></span><span><strong>[NOME DO ALUNO]</strong><small>[CURSO]</small></span></figcaption>
+      </figure>
+      <figure class="testimonial">
+        <svg class="ic quote-ic"><use href="#i-quote"/></svg>
+        <p class="placeholder-flag">Depoimento real do aluno — substituir antes da publicação.</p>
+        <blockquote>[INSERIR DEPOIMENTO]</blockquote>
+        <figcaption><span class="avatar"><svg class="ic"><use href="#i-user"/></svg></span><span><strong>[NOME DO ALUNO]</strong><small>[CURSO]</small></span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9. FAQ ================= -->
+<section class="section section-tint" id="faq">
+  <div class="container faq-grid">
+    <div class="section-head">
+      <p class="eyebrow">Dúvidas frequentes</p>
+      <h2>Perguntas frequentes</h2>
+      <p class="lead">Não encontrou sua resposta? Nossa equipe pode ajudar.</p>
+      <a href="#" class="btn btn-wa" data-wa="Olá! Tenho uma dúvida sobre os cursos da LíderTec.">
+        <svg class="ic"><use href="#i-wa"/></svg> Tirar dúvida no WhatsApp
+      </a>
+    </div>
+    <!-- Respostas editáveis. Use apenas informações confirmadas pela instituição. -->
+    <div class="accordion">
+      <details class="faq-item">
+        <summary>Quais cursos estão disponíveis?<svg class="ic"><use href="#i-plus"/></svg></summary>
+        <div class="faq-body"><p>Os cursos estão organizados em três categorias: 10 a 15 dias (competência CT), 7 dias (competência IT) e 2 a 7 dias (competência SEI). Veja a lista completa na seção <a href="#cursos">Cursos</a>.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Como faço minha matrícula?<svg class="ic"><use href="#i-plus"/></svg></summary>
+        <div class="faq-body"><p>Fale com um consultor pelo WhatsApp ou preencha o formulário de contato. [INSERIR INFORMAÇÃO] sobre as etapas da matrícula.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Como escolher o curso ideal?<svg class="ic"><use href="#i-plus"/></svg></summary>
+        <div class="faq-body"><p>Pense na área em que você deseja atuar e nos seus objetivos de carreira. Se tiver dúvidas, um consultor pode apresentar as opções e ajudar na escolha.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Os cursos possuem certificado?<svg class="ic"><use href="#i-plus"/></svg></summary>
+        <div class="faq-body"><p>[INSERIR INFORMAÇÃO OFICIAL] sobre certificação e as regras da instituição para sua emissão.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Qual é a duração dos cursos?<svg class="ic"><use href="#i-plus"/></svg></summary>
+        <div class="faq-body"><p>A duração varia conforme a categoria do curso. [INSERIR INFORMAÇÃO] com detalhes sobre prazos e carga horária.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Como funciona o atendimento?<svg class="ic"><use href="#i-plus"/></svg></summary>
+        <div class="faq-body"><p>O atendimento é feito por consultores, pelo WhatsApp ou a partir do formulário do site. Horário de atendimento: [INSERIR INFORMAÇÃO].</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Posso falar com um consultor pelo WhatsApp?<svg class="ic"><use href="#i-plus"/></svg></summary>
+        <div class="faq-body"><p>Sim. Use o botão do WhatsApp disponível no site para iniciar a conversa.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Quais são as formas de pagamento?<svg class="ic"><use href="#i-plus"/></svg></summary>
+        <div class="faq-body"><p>[INSERIR INFORMAÇÃO]</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Quais documentos são necessários?<svg class="ic"><use href="#i-plus"/></svg></summary>
+        <div class="faq-body"><p>[INSERIR INFORMAÇÃO]</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Onde posso obter mais informações?<svg class="ic"><use href="#i-plus"/></svg></summary>
+        <div class="faq-body"><p>Fale com nossa equipe pelo WhatsApp ou envie sua mensagem pelo <a href="#contato">formulário de contato</a>.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10. CONTATO ================= -->
+<section class="section" id="contato">
+  <div class="container contact-grid">
+    <aside class="contact-aside">
+      <p class="eyebrow on-dark">Contato</p>
+      <h2>Fale com a equipe LíderTec</h2>
+      <p>Preencha o formulário e um consultor entrará em contato. Se preferir, chame direto no WhatsApp.</p>
+      <ul class="contact-list">
+        <li><span class="ci"><svg class="ic"><use href="#i-wa"/></svg></span><span><small>WhatsApp</small><a href="#" data-wa="Olá! Vim pelo site da LíderTec." class="wa-display">—</a></span></li>
+        <li><span class="ci"><svg class="ic"><use href="#i-mail"/></svg></span><span><small>E-mail</small>[INSERIR INFORMAÇÃO]</span></li>
+        <li><span class="ci"><svg class="ic"><use href="#i-pin"/></svg></span><span><small>Endereço</small>[INSERIR INFORMAÇÃO]</span></li>
+        <li><span class="ci"><svg class="ic"><use href="#i-clock"/></svg></span><span><small>Horário de atendimento</small>[INSERIR INFORMAÇÃO]</span></li>
+      </ul>
+    </aside>
+
+    <div class="form-card">
+      <form id="contact-form" novalidate>
+        <!-- honeypot anti-spam: deve permanecer vazio -->
+        <div class="hp" aria-hidden="true"><label for="f-empresa">Empresa</label><input type="text" id="f-empresa" name="empresa" tabindex="-1" autocomplete="off"></div>
+
+        <div class="form-grid">
+          <div class="field full">
+            <label for="f-nome">Nome completo <span class="req">*</span></label>
+            <input type="text" id="f-nome" name="nome" autocomplete="name" placeholder="Seu nome completo">
+            <p class="field-error" id="e-nome"></p>
+          </div>
+          <div class="field">
+            <label for="f-whatsapp">WhatsApp <span class="req">*</span></label>
+            <input type="tel" id="f-whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000">
+            <p class="field-error" id="e-whatsapp"></p>
+          </div>
+          <div class="field">
+            <label for="f-email">E-mail <span class="req">*</span></label>
+            <input type="email" id="f-email" name="email" autocomplete="email" placeholder="voce@email.com">
+            <p class="field-error" id="e-email"></p>
+          </div>
+          <div class="field">
+            <label for="f-cidade">Cidade e Estado <span class="req">*</span></label>
+            <input type="text" id="f-cidade" name="cidade" autocomplete="address-level2" placeholder="Ex.: Belo Horizonte – MG">
+            <p class="field-error" id="e-cidade"></p>
+          </div>
+          <div class="field">
+            <label for="f-curso">Curso de interesse <span class="req">*</span></label>
+            <select id="f-curso" name="curso"></select>
+            <p class="field-error" id="e-curso"></p>
+          </div>
+          <div class="field full">
+            <label for="f-mensagem">Mensagem <span class="opt">(opcional)</span></label>
+            <textarea id="f-mensagem" name="mensagem" rows="4" placeholder="Conte o que você gostaria de saber"></textarea>
+          </div>
+          <div class="field full">
+            <label class="check">
+              <input type="checkbox" id="f-consent" name="consentimento">
+              <span>Autorizo o contato da LíderTec para receber informações sobre cursos e atendimento.</span>
+            </label>
+            <p class="field-error" id="e-consent"></p>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit-btn">
+          <span class="btn-label">Enviar mensagem</span><svg class="ic"><use href="#i-arrow"/></svg>
+        </button>
+        <p class="form-note">Campos com <span class="req">*</span> são obrigatórios.</p>
+      </form>
+
+      <div class="form-success" id="form-success" hidden tabindex="-1">
+        <span class="success-ic"><svg class="ic"><use href="#i-check"/></svg></span>
+        <h3>Mensagem enviada!</h3>
+        <p>Obrigado pelo contato, <strong id="success-name"></strong>. Em breve a equipe LíderTec vai retornar pelo WhatsApp ou e-mail informado.</p>
+        <div class="btn-row center">
+          <a href="#" class="btn btn-wa" id="success-wa"><svg class="ic"><use href="#i-wa"/></svg> Continuar pelo WhatsApp</a>
+          <button type="button" class="btn btn-outline" id="form-reset">Enviar outra mensagem</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= RODAPÉ ================= -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo"><img src="assets/img/logo-lidertec-provisorio.png" alt="LíderTec" width="170" height="40"></span>
+      <p>Cursos Técnicos e Educação Superior.</p>
+    </div>
+    <nav aria-label="Rodapé">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#sobre">Sobre a LíderTec</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#faq">Dúvidas frequentes</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h4>Atendimento</h4>
+      <ul>
+        <li><a href="#" data-wa="Olá! Vim pelo site da LíderTec." class="wa-display">—</a></li>
+        <li>[INSERIR E-MAIL]</li>
+        <li>[INSERIR ENDEREÇO]</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Institucional</h4>
+      <ul>
+        <li>CNPJ: [INSERIR INFORMAÇÃO]</li>
+        <li>Registro: [INSERIR INFORMAÇÃO OFICIAL]</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© <span id="year"></span> LíderTec. Todos os direitos reservados.</p>
+    <a href="#topo">Voltar ao topo ↑</a>
+  </div>
+</footer>
+
+<!-- WhatsApp flutuante -->
+<a href="#" class="wa-float" data-wa="Olá! Vim pelo site e gostaria de falar com um consultor da LíderTec." aria-label="Falar pelo WhatsApp">
+  <svg class="ic"><use href="#i-wa"/></svg>
+  <span class="wa-float-label">Fale conosco</span>
+</a>
+
+<!-- Modal "Tenho interesse" -->
+<dialog class="modal" id="interest-modal" aria-labelledby="modal-title">
+  <button type="button" class="modal-close" data-close aria-label="Fechar"><svg class="ic"><use href="#i-x"/></svg></button>
+  <span class="modal-ic" id="modal-ic"><svg class="ic"><use href="#a-saude"/></svg></span>
+  <p class="modal-cat" id="modal-cat"></p>
+  <h3 id="modal-title"></h3>
+  <p class="modal-desc" id="modal-desc"></p>
+  <p class="modal-q">Como você prefere continuar?</p>
+  <div class="modal-actions">
+    <a href="#" class="btn btn-wa btn-block" id="modal-wa"><svg class="ic"><use href="#i-wa"/></svg> Falar pelo WhatsApp</a>
+    <button type="button" class="btn btn-outline btn-block" id="modal-form">Preencher formulário</button>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
