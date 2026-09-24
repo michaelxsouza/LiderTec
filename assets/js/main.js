@@ -428,7 +428,11 @@ function initForm() {
     $(".btn-label", btn).textContent = "Enviando…";
     try {
       await LT.sendLead(data);
-      LT.track(CFG.conversionLabelForm, { event_category: "formulario", curso: data.curso });
+      const waMsg = `Olá! Sou ${data.nome}, de ${data.cidade_estado}. Acabei de enviar o formulário do site e tenho interesse em: ${data.curso}.`;
+      if (LT.goThankYou) {
+        LT.goThankYou({ nome: data.nome, curso: course ? course.n : "", slug: course ? slugify(course.n) : "", origem: "site", waMsg });
+        return;
+      }
       showSuccess(data.nome, data);
     } catch (err) {
       console.error(err);

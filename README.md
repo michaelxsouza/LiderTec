@@ -148,3 +148,13 @@ python tools/gerar_paginas.py
 ```
 
 **Antes de rodar anúncios:** configure o envio do formulário (seção 5) e, quando tiver, preencha `REQUISITOS` em `tools/gerar_paginas.py` e `REGISTRO_CONFIRMADO` em `tools/cursos.py`. Depois gere as páginas de novo.
+
+## 9. Página de obrigado
+
+Depois do envio de qualquer formulário (site ou páginas de captura), o visitante vai para `/obrigado/?curso=<curso>&origem=site|lp`. A página mostra o nome e o curso da pessoa, o botão do WhatsApp com a mensagem pronta, os próximos passos e o link do SISTEC. Ela não aparece na busca do Google (`noindex`).
+
+**Conversão no Google Ads (duas opções, use só uma):**
+
+- **Pelo código:** preencha `googleAdsId` e `conversionLabelForm` em `assets/js/config.js`. A conversão dispara na página de obrigado, uma vez por envio (recarregar a página não conta de novo).
+- **Pelo endereço, sem código:** no Google Ads, crie uma conversão do tipo "Visualização de página" com a regra "URL contém `/obrigado/`". Nesse caso, deixe `conversionLabelForm` vazio para não contar duas vezes. Essa opção conta de novo se a pessoa recarregar a página.
+

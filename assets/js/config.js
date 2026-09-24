@@ -82,6 +82,18 @@ window.LIDERTEC_CONFIG = {
     });
   }
 
-  window.LiderTec = { config: CFG, sendLead, track, hidePending };
+  // Leva o visitante para a página de obrigado depois do envio.
+  // A conversão do Google Ads é registrada na própria página de obrigado.
+  // Na página, <body data-root="../../"> indica o caminho até a raiz do site (páginas de captura).
+  function goThankYou(info) {
+    try { sessionStorage.setItem("lt_lead", JSON.stringify({ ...info, pending: true, t: Date.now() })); } catch (e) {}
+    const root = document.body.dataset.root || "";
+    const q = new URLSearchParams();
+    if (info.slug) q.set("curso", info.slug);
+    q.set("origem", info.origem || "site");
+    location.href = `${root}obrigado/?${q.toString()}`;
+  }
+
+  window.LiderTec = { config: CFG, sendLead, track, hidePending, goThankYou };
   document.addEventListener("DOMContentLoaded", hidePending);
 })();

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recebemos seus dados | LíderTec</title>
+<!-- Página de obrigado: fora da busca do Google -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#15134F">
+<link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  body { background: var(--gray-50); }
+  .ty-header { background: #fff; box-shadow: 0 1px 0 var(--gray-100); }
+  .ty-header .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+  .ty-header img { height: 38px; width: auto; }
+  .ty-header a.back { font-family: var(--font-display); font-weight: 700; font-size: .9rem; color: var(--purple); text-decoration: none; }
+
+  .ty { max-width: 760px; margin-inline: auto; padding-block: clamp(32px, 6vw, 64px) 72px; display: grid; gap: 20px; }
+  .ty-card { background: #fff; border-radius: 28px; border: 1px solid var(--gray-100); box-shadow: var(--shadow); padding: clamp(24px, 5vw, 44px); }
+  .ty-hero { text-align: center; display: grid; justify-items: center; gap: 14px; position: relative; overflow: hidden; }
+  .ty-hero::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 6px; background: var(--grad); }
+  .ty-check { display: grid; place-items: center; width: 84px; height: 84px; border-radius: 50%; background: #E3F7EA; color: var(--wa); animation: pop .5s cubic-bezier(.2,1.4,.4,1); }
+  .ty-check .ic { width: 42px; height: 42px; stroke-width: 3; }
+  .ty-hero h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
+  .ty-hero .lead { max-width: 52ch; }
+  .ty-course { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #FDE4EE; color: #B0004A; font-family: var(--font-display); font-weight: 700; font-size: .85rem; }
+  .ty-course .ic { width: 16px; height: 16px; }
+  .ty-wa { width: 100%; max-width: 420px; margin-top: 6px; }
+  .ty-save { font-size: .9rem; color: var(--gray-500); }
+  .ty-save strong { color: var(--navy); font-variant-numeric: tabular-nums; }
+
+  .ty h2 { font-size: 1.3rem; margin-bottom: 18px; }
+  .ty-steps { display: grid; gap: 16px; counter-reset: ty; }
+  .ty-steps li { position: relative; padding-left: 52px; counter-increment: ty; }
+  .ty-steps li::before {
+    content: counter(ty); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
+    background: var(--grad-pink); color: #fff; font-family: var(--font-display); font-weight: 800;
+  }
+  .ty-steps strong { display: block; font-family: var(--font-display); color: var(--navy); }
+  .ty-steps span { color: var(--gray-500); font-size: .95rem; }
+
+  .ty-sistec { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+  .ty-sistec p { color: #45445F; max-width: 46ch; }
+  .ty-sistec strong { font-family: var(--font-display); color: var(--navy); }
+  .ty-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .ty-footer { background: #0E0C38; color: rgba(255,255,255,.7); padding-block: 24px; font-size: .88rem; }
+  .ty-footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+  .ty-footer a { color: #fff; }
+</style>
+</head>
+<body>
+
+<header class="ty-header">
+  <div class="container">
+    <a href="../index.html"><img src="../assets/img/logo-lidertec-provisorio.png" alt="LíderTec – página inicial" width="160" height="38"></a>
+    <a href="../index.html" class="back">Voltar ao site</a>
+  </div>
+</header>
+
+<main class="container">
+  <div class="ty">
+    <section class="ty-card ty-hero" aria-labelledby="ty-title">
+      <span class="ty-check"><svg class="ic" aria-hidden="true"><use href="../assets/img/icons.svg#i-check"/></svg></span>
+      <h1 id="ty-title">Recebemos seus dados<span id="ty-name"></span>!</h1>
+      <p class="ty-course" id="ty-course" hidden><svg class="ic" aria-hidden="true"><use href="../assets/img/icons.svg#i-award"/></svg><span></span></p>
+      <p class="lead">Um consultor da LíderTec vai chamar você no WhatsApp. Se preferir, adiante a conversa agora.</p>
+      <a href="#" class="btn btn-wa btn-lg ty-wa" id="ty-wa" target="_blank" rel="noopener">
+        <svg class="ic" aria-hidden="true"><use href="../assets/img/icons.svg#i-wa"/></svg> Continuar no WhatsApp
+      </a>
+      <p class="ty-save">Salve nosso número para não perder a mensagem: <strong class="wa-display">+55 (31) 7194-2302</strong></p>
+    </section>
+
+    <section class="ty-card" aria-labelledby="ty-next">
+      <h2 id="ty-next">O que acontece agora</h2>
+      <ol class="ty-steps">
+        <li><strong>Um consultor chama você no WhatsApp</strong><span>No número que você informou no formulário.</span></li>
+        <li><strong>Ele avalia seu perfil</strong><span>Confere sua experiência na área e explica as etapas, os documentos e as condições.</span></li>
+        <li><strong>Você decide se quer seguir</strong><span>Com tudo explicado, você escolhe se inicia a certificação por competência.</span></li>
+      </ol>
+    </section>
+
+    <section class="ty-card ty-sistec" aria-label="Reconhecimento MEC/SISTEC">
+      <p><strong>Quer conferir a regularidade?</strong><br>Nossa certificadora parceira é regularizada no SISTEC/MEC (códigos 45630 e 61295, no Pará).</p>
+      <a href="https://sistec.mec.gov.br/consultapublicaunidadeensino/" class="btn btn-outline" target="_blank" rel="noopener">
+        Consultar no SISTEC <svg class="ic" aria-hidden="true"><use href="../assets/img/icons.svg#i-external"/></svg>
+      </a>
+    </section>
+
+    <div class="ty-links">
+      <a href="../index.html#cursos" class="btn btn-outline">Ver outros cursos</a>
+      <a href="../index.html" class="btn btn-outline">Voltar ao site</a>
+    </div>
+  </div>
+</main>
+
+<footer class="ty-footer">
+  <div class="container">
+    <p>© <span id="year">2026</span> LíderTec. Todos os direitos reservados.</p>
+    <a href="../politica-de-privacidade.html">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script src="../assets/js/config.js"></script>
+<script>
+  (function () {
+    var CFG = window.LIDERTEC_CONFIG || {};
+    var LT = window.LiderTec || { track: function () {} };
+    var number = CFG.whatsappNumber || "553171942302";
+    var lead = {};
+    try { lead = JSON.parse(sessionStorage.getItem("lt_lead") || "{}"); } catch (e) {}
+
+    // Nome e curso
+    if (lead.nome) document.getElementById("ty-name").textContent = ", " + String(lead.nome).trim().split(/\s+/)[0];
+    if (lead.curso) {
+      var chip = document.getElementById("ty-course");
+      chip.querySelector("span").textContent = lead.curso;
+      chip.hidden = false;
+    }
+
+    // WhatsApp com a mensagem preparada no formulário
+    var msg = lead.waMsg || "Olá! Acabei de enviar meus dados pelo site da LíderTec.";
+    var wa = document.getElementById("ty-wa");
+    wa.href = "https://wa.me/" + number + "?text=" + encodeURIComponent(msg);
+    wa.addEventListener("click", function () {
+      LT.track(CFG.conversionLabelWhatsapp, { event_category: "whatsapp", curso: lead.curso || "" });
+    });
+
+    // Número formatado
+    var d = number.replace(/\D/g, "");
+    if (d.indexOf("55") === 0 && d.length >= 12) {
+      var r = d.slice(4);
+      var txt = "+55 (" + d.slice(2, 4) + ") " + (r.length === 9 ? r.slice(0, 5) + "-" + r.slice(5) : r.slice(0, 4) + "-" + r.slice(4));
+      document.querySelectorAll(".wa-display").forEach(function (el) { el.textContent = txt; });
+    }
+
+    // Conversão do formulário: registrada uma única vez por envio (recarregar a página não conta de novo)
+    if (lead.pending) {
+      LT.track(CFG.conversionLabelForm, { event_category: "formulario", curso: lead.curso || "", origem: lead.origem || "" });
+      lead.pending = false;
+      try { sessionStorage.setItem("lt_lead", JSON.stringify(lead)); } catch (e) {}
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  })();
+</script>
+</body>
+</html>

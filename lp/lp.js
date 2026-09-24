@@ -117,7 +117,11 @@ if (form) {
     label.textContent = "Enviando…";
     try {
       await LT.sendLead(data);
-      trackConversion(CFG.conversionLabelForm, { event_category: "formulario", curso: COURSE });
+      const waMsg = `Olá! Sou ${data.nome}, de ${data.cidade_estado}. Tenho ${data.experiencia.toLowerCase()} de experiência e quero a certificação por competência em ${COURSE}. [${refCode}]`;
+      if (LT.goThankYou) {
+        LT.goThankYou({ nome: data.nome, curso: COURSE, slug: document.body.dataset.slug || "", origem: "lp", ref: refCode, waMsg });
+        return;
+      }
       const first = data.nome.split(/\s+/)[0];
       $("#lp-success-name").textContent = first;
       const wa = $("#lp-success-wa");

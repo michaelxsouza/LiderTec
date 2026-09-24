@@ -64,7 +64,7 @@ def page(c):
 <link rel="stylesheet" href="../lp.css">
 </head>
 <!-- data-course: nome do curso usado nas mensagens | data-ref: código para identificar a origem no WhatsApp -->
-<body class="lp" data-course="{n}" data-ref="{c['ref']}">
+<body class="lp" data-course="{n}" data-ref="{c['ref']}" data-slug="{c['slug']}" data-root="../../">
 
 <header class="lp-header">
   <div class="container">
