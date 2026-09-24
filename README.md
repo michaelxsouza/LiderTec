@@ -112,18 +112,21 @@ As cores ficam no início de `style.css`:
 
 ## 8. Páginas de captura (Google Ads)
 
-Uma página por curso, sem menu, com formulário e WhatsApp. Não aparecem na busca orgânica (`noindex`).
+Existe uma página por curso (65 no total), sem menu, com formulário e WhatsApp, no endereço `/lp/<curso>/` (ex.: `/lp/seguranca-do-trabalho/`). Elas não aparecem na busca orgânica (`noindex`).
 
-| Curso | Endereço | Código no WhatsApp |
-|---|---|---|
-| Segurança do Trabalho | `/lp/seguranca-do-trabalho/` | `LP-SST` |
-| Eletrotécnica | `/lp/eletrotecnica/` | `LP-ELT` |
-| Mineração | `/lp/mineracao/` | `LP-MIN` |
+- **Lista de todas as páginas:** abra `/lp/` no navegador, ou `lp/paginas.csv` no Excel (tem a URL final de cada curso para colar no Google Ads).
+- **Código no WhatsApp:** cada mensagem chega com o código do curso, ex.: `[LP-SEGURANCA-DO-TRABALHO-GADS]`. O sufixo `-GADS` aparece quando o visitante veio de anúncio do Google (`gclid` ou `utm_source=google`).
+- **Configurações em `lp/lp.js`:** `whatsappNumber`, `FORM_ENDPOINT` (recebe também `experiencia`, `referencia`, `pagina`, `utm_*` e `gclid`), `GOOGLE_ADS_ID`, `CONVERSION_LABEL_FORM` e `CONVERSION_LABEL_WHATSAPP`.
 
-A mensagem do WhatsApp chega com o código entre colchetes, por exemplo `[LP-SST-GADS]`. O sufixo `-GADS` aparece quando o visitante veio de anúncio do Google (link com `gclid` ou `utm_source=google`).
+### Editar as páginas (sem mexer em 65 arquivos)
 
-**Configurações em `lp/lp.js`:** `whatsappNumber`, `FORM_ENDPOINT` (mesmo formato do formulário principal, com campos extras `experiencia`, `referencia`, `pagina`, `utm_*` e `gclid`), `GOOGLE_ADS_ID` e os rótulos de conversão `CONVERSION_LABEL_FORM` e `CONVERSION_LABEL_WHATSAPP`. Com o ID preenchido, a tag do Google Ads carrega sozinha e as conversões disparam no envio do formulário e no clique do WhatsApp.
+As páginas são geradas por um script. Edite e rode de novo:
 
-**Antes de rodar anúncios:** preencha os `[INSERIR INFORMAÇÃO]` (requisitos, documentos, pagamento) e confirme os textos marcados com `[CONFIRMAR COM A CERTIFICADORA]` sobre registro profissional.
+- `tools/gerar_paginas.py` – textos comuns a todas as páginas (título, requisitos, FAQ, reconhecimento).
+- `tools/cursos.py` – dados de cada curso (área, categorias, perfis e texto de registro profissional).
 
-**Criar página para outro curso:** copie uma pasta de `lp/`, renomeie (ex.: `lp/edificacoes/`) e, no `index.html`, troque o nome do curso, o `data-course` e o `data-ref` do `<body>`, os três itens de "Para quem é", a categoria na pergunta "Quanto tempo leva?" e a resposta sobre registro profissional.
+```
+python tools/gerar_paginas.py
+```
+
+**Antes de rodar anúncios:** preencha os `[INSERIR INFORMAÇÃO]` (requisitos, documentos, pagamento) em `tools/gerar_paginas.py` e confirme os textos marcados com `[CONFIRMAR COM A CERTIFICADORA]` em `tools/cursos.py`. Depois gere as páginas de novo.
