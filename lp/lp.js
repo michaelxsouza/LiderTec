@@ -1,0 +1,172 @@
+/* =========================================================
+   LíderTec – script das páginas de captura
+   Cada página informa o curso no <body>:
+   <body class="lp" data-course="Segurança do Trabalho" data-ref="LP-SST">
+   ========================================================= */
+
+/* ---------------- CONFIGURAÇÕES EDITÁVEIS ---------------- */
+
+// Número do WhatsApp (DDI + DDD + número, só dígitos)
+const whatsappNumber = "553171942302";
+
+// Endereço que recebe o formulário (POST em JSON). Vazio = envio simulado.
+const FORM_ENDPOINT = "";
+
+// Google Ads: ID da conta (ex.: "AW-123456789") e rótulos de conversão.
+// Deixe vazio até criar as conversões no Google Ads.
+const GOOGLE_ADS_ID = "";
+const CONVERSION_LABEL_FORM = "";      // conversão "Formulário enviado"
+const CONVERSION_LABEL_WHATSAPP = "";  // conversão "Clique no WhatsApp"
+
+/* ========================================================= */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const COURSE = document.body.dataset.course || "";
+const REF = document.body.dataset.ref || "LP";
+
+/* ---------- Origem do visitante (UTM e gclid) ---------- */
+const TRACK_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"];
+function getTracking() {
+  const params = new URLSearchParams(location.search);
+  let saved = {};
+  try { saved = JSON.parse(sessionStorage.getItem("lt_tracking") || "{}"); } catch (e) {}
+  const data = { ...saved };
+  TRACK_KEYS.forEach((k) => { if (params.get(k)) data[k] = params.get(k); });
+  try { sessionStorage.setItem("lt_tracking", JSON.stringify(data)); } catch (e) {}
+  return data;
+}
+const tracking = getTracking();
+const fromAds = Boolean(tracking.gclid || /google/i.test(tracking.utm_source || ""));
+const refCode = `${REF}${fromAds ? "-GADS" : ""}`;
+
+/* ---------- Google Ads (gtag) ---------- */
+if (GOOGLE_ADS_ID) {
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag("js", new Date());
+  gtag("config", GOOGLE_ADS_ID);
+}
+function trackConversion(label, extra = {}) {
+  if (GOOGLE_ADS_ID && label && window.gtag) {
+    gtag("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/${label}`, ...extra });
+  }
+  console.info("[LíderTec] conversão:", label || "(sem rótulo configurado)", extra);
+}
+
+/* ---------- WhatsApp ---------- */
+function waLink(msg) {
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
+}
+const defaultWaMsg = `Olá! Tenho experiência na área e quero saber sobre a certificação por competência em ${COURSE}. [${refCode}]`;
+$$("[data-wa]").forEach((a) => {
+  a.href = waLink(a.dataset.wa || defaultWaMsg);
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.addEventListener("click", () => trackConversion(CONVERSION_LABEL_WHATSAPP, { event_category: "whatsapp", curso: COURSE }));
+});
+
+/* ---------- Formulário ---------- */
+const form = $("#lp-form");
+const fieldOf = (name) => form.elements[name];
+
+function setError(name, msg) {
+  const el = fieldOf(name);
+  const box = el.closest(".field");
+  box.classList.toggle("invalid", Boolean(msg));
+  if (msg) { el.setAttribute("aria-invalid", "true"); el.setAttribute("aria-describedby", `e-${name}`); }
+  else el.removeAttribute("aria-invalid");
+  $(`#e-${name}`).textContent = msg;
+}
+
+const validators = {
+  nome: (v) => !v.trim() ? "Informe seu nome completo." : !/\S+\s+\S+/.test(v.trim()) ? "Informe nome e sobrenome." : "",
+  whatsapp: (v) => { const d = v.replace(/\D/g, ""); return !d ? "Informe seu WhatsApp com DDD." : (d.length < 10 || d.length > 11) ? "Confira o número: DDD + número, ex.: (31) 99999-9999." : ""; },
+  cidade: (v) => v.trim().length < 3 ? "Informe sua cidade e estado." : "",
+  experiencia: (v) => !v ? "Selecione seu tempo de experiência na área." : "",
+  consentimento: (_, el) => !el.checked ? "Para continuar, autorize o contato da LíderTec." : "",
+};
+function validate(name) {
+  const el = fieldOf(name);
+  const msg = validators[name](el.value, el);
+  setError(name, msg);
+  return !msg;
+}
+function maskPhone(v) {
+  const d = v.replace(/\D/g, "").slice(0, 11);
+  if (d.length <= 2) return d ? `(${d}` : "";
+  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
+
+if (form) {
+  const phone = fieldOf("whatsapp");
+  phone.addEventListener("input", () => { phone.value = maskPhone(phone.value); });
+
+  Object.keys(validators).forEach((name) => {
+    const el = fieldOf(name);
+    const evt = el.type === "checkbox" || el.tagName === "SELECT" ? "change" : "input";
+    el.addEventListener(evt, () => { if (el.closest(".field").classList.contains("invalid")) validate(name); });
+    el.addEventListener("blur", () => { if (el.value && el.type !== "checkbox") validate(name); });
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const names = Object.keys(validators);
+    const ok = names.map(validate);
+    if (ok.includes(false)) { fieldOf(names[ok.indexOf(false)]).focus(); return; }
+    if (form.elements.empresa.value) return; // honeypot anti-spam
+
+    const data = {
+      nome: fieldOf("nome").value.trim(),
+      whatsapp: fieldOf("whatsapp").value.replace(/\D/g, ""),
+      cidade_estado: fieldOf("cidade").value.trim(),
+      experiencia: fieldOf("experiencia").value,
+      curso: COURSE,
+      modalidade: "Certificação por competência",
+      pagina: location.pathname,
+      referencia: refCode,
+      ...tracking,
+      consentimento: true,
+      enviado_em: new Date().toISOString(),
+    };
+
+    const btn = $("#lp-submit");
+    btn.disabled = true;
+    const label = $(".btn-label", btn);
+    label.textContent = "Enviando…";
+    try {
+      if (FORM_ENDPOINT) {
+        const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(data) });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      } else {
+        await new Promise((r) => setTimeout(r, 800));
+        console.info("[LíderTec] Envio simulado. Configure FORM_ENDPOINT em lp/lp.js.", data);
+      }
+      trackConversion(CONVERSION_LABEL_FORM, { event_category: "formulario", curso: COURSE });
+      const first = data.nome.split(/\s+/)[0];
+      $("#lp-success-name").textContent = first;
+      const wa = $("#lp-success-wa");
+      wa.href = waLink(`Olá! Sou ${data.nome}, de ${data.cidade_estado}. Tenho ${data.experiencia.toLowerCase()} de experiência e quero a certificação por competência em ${COURSE}. [${refCode}]`);
+      wa.target = "_blank"; wa.rel = "noopener";
+      wa.addEventListener("click", () => trackConversion(CONVERSION_LABEL_WHATSAPP, { event_category: "whatsapp", curso: COURSE }), { once: true });
+      form.hidden = true;
+      $("#lp-success").hidden = false;
+      $("#lp-success").focus();
+    } catch (err) {
+      console.error(err);
+      label.textContent = "Não foi possível enviar. Tente de novo";
+      setTimeout(() => (label.textContent = "Quero receber informações"), 3500);
+    } finally {
+      btn.disabled = false;
+      if (label.textContent === "Enviando…") label.textContent = "Quero receber informações";
+    }
+  });
+}
+
+const y = $("#year");
+if (y) y.textContent = new Date().getFullYear();

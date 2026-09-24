@@ -109,3 +109,21 @@ As cores ficam no início de `style.css`:
 | Rosa | `#F21B71` |
 | Cinza claro | `#F5F6FA` |
 | Texto | `#202038` |
+
+## 8. Páginas de captura (Google Ads)
+
+Uma página por curso, sem menu, com formulário e WhatsApp. Não aparecem na busca orgânica (`noindex`).
+
+| Curso | Endereço | Código no WhatsApp |
+|---|---|---|
+| Segurança do Trabalho | `/lp/seguranca-do-trabalho/` | `LP-SST` |
+| Eletrotécnica | `/lp/eletrotecnica/` | `LP-ELT` |
+| Mineração | `/lp/mineracao/` | `LP-MIN` |
+
+A mensagem do WhatsApp chega com o código entre colchetes, por exemplo `[LP-SST-GADS]`. O sufixo `-GADS` aparece quando o visitante veio de anúncio do Google (link com `gclid` ou `utm_source=google`).
+
+**Configurações em `lp/lp.js`:** `whatsappNumber`, `FORM_ENDPOINT` (mesmo formato do formulário principal, com campos extras `experiencia`, `referencia`, `pagina`, `utm_*` e `gclid`), `GOOGLE_ADS_ID` e os rótulos de conversão `CONVERSION_LABEL_FORM` e `CONVERSION_LABEL_WHATSAPP`. Com o ID preenchido, a tag do Google Ads carrega sozinha e as conversões disparam no envio do formulário e no clique do WhatsApp.
+
+**Antes de rodar anúncios:** preencha os `[INSERIR INFORMAÇÃO]` (requisitos, documentos, pagamento) e confirme os textos marcados com `[CONFIRMAR COM A CERTIFICADORA]` sobre registro profissional.
+
+**Criar página para outro curso:** copie uma pasta de `lp/`, renomeie (ex.: `lp/edificacoes/`) e, no `index.html`, troque o nome do curso, o `data-course` e o `data-ref` do `<body>`, os três itens de "Para quem é", a categoria na pergunta "Quanto tempo leva?" e a resposta sobre registro profissional.

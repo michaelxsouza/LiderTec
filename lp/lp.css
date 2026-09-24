@@ -1,0 +1,93 @@
+/* =========================================================
+   LíderTec – Páginas de captura (Google Ads)
+   Usa os tokens e componentes de assets/css/style.css
+   ========================================================= */
+
+body.lp { background: var(--white); }
+
+/* Cabeçalho mínimo, sem menu */
+.lp-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--gray-100); }
+.lp-header .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+.lp-header img { height: 38px; width: auto; }
+.lp-header .btn { padding: 10px 18px; font-size: .86rem; }
+
+/* Hero com formulário */
+.lp-hero { position: relative; overflow: hidden; background: var(--grad); color: #fff; padding-block: clamp(40px, 6vw, 80px); }
+.lp-hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,.14) 1.5px, transparent 2px); background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(100deg, transparent 35%, #000 100%); mask-image: linear-gradient(100deg, transparent 35%, #000 100%);
+}
+.lp-hero::after {
+  content: ""; position: absolute; right: -160px; top: -160px; width: 420px; height: 420px; border-radius: 50%;
+  border: 2px dashed rgba(255,255,255,.18); pointer-events: none;
+}
+.lp-hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.lp-hero-copy { display: grid; gap: 20px; }
+.lp-kicker {
+  display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 8px 14px; border-radius: 999px;
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22);
+  font-family: var(--font-display); font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+}
+.lp-hero h1 { color: #fff; font-size: clamp(1.9rem, 3.8vw, 2.9rem); }
+.lp-hero h1 em { font-style: normal; color: #FF8DBB; }
+.lp-hero .lead { color: rgba(255,255,255,.88); }
+.lp-checks { display: grid; gap: 12px; }
+.lp-checks li { display: flex; gap: 12px; align-items: flex-start; font-weight: 600; }
+.lp-checks .ic { width: 22px; height: 22px; padding: 4px; margin-top: 1px; border-radius: 50%; background: #fff; color: var(--magenta); stroke-width: 3; }
+.lp-hero .btn-row { margin-top: 4px; }
+
+.lp-form-card { background: #fff; color: var(--text); border-radius: 26px; padding: clamp(22px, 3vw, 32px); box-shadow: 0 30px 70px -24px rgba(0,0,0,.5); }
+.lp-form-card h2 { font-size: 1.35rem; }
+.lp-form-card form > p:first-of-type, .lp-form-card > p { color: var(--gray-500); font-size: .95rem; margin: 6px 0 18px; }
+.lp-form-card .form-grid { grid-template-columns: 1fr; gap: 14px; margin-bottom: 16px; }
+.lp-form-card .field input, .lp-form-card .field select { padding: 11px 14px; }
+.lp-or { display: flex; align-items: center; gap: 12px; margin: 14px 0; color: var(--gray-500); font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
+.lp-or::before, .lp-or::after { content: ""; flex: 1; height: 1px; background: var(--gray-100); }
+.lp-secure { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; font-size: .8rem; color: var(--gray-500); text-align: center; }
+.lp-secure .ic { width: 14px; height: 14px; }
+
+/* Seções */
+.lp-section { padding-block: clamp(56px, 8vw, 96px); }
+.lp-section.tint { background: var(--gray-50); }
+.lp-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+.lp-profile { display: grid; gap: 12px; }
+.lp-profile li { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 16px; background: #fff; border: 1px solid var(--gray-100); box-shadow: var(--shadow-sm); }
+.lp-profile .ic { width: 36px; height: 36px; padding: 8px; border-radius: 10px; background: var(--grad-soft); color: var(--purple); }
+.lp-req { display: grid; gap: 14px; padding: 26px; border-radius: 24px; background: var(--navy); color: rgba(255,255,255,.85); }
+.lp-req h3 { color: #fff; font-size: 1.15rem; }
+.lp-req ul { display: grid; gap: 10px; }
+.lp-req li { display: flex; gap: 10px; align-items: flex-start; }
+.lp-req li .ic { color: #FF7BB0; margin-top: 3px; }
+.lp-req .note { font-size: .85rem; color: rgba(255,255,255,.65); }
+.lp-cc { margin-top: 18px; padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px dashed #C9B8DA; font-size: .95rem; color: #45445F; }
+.lp-cc strong { font-family: var(--font-display); color: var(--navy); }
+
+.lp-final { text-align: center; }
+.lp-final .cta-band { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+.lp-final .cta-copy { justify-items: center; }
+
+.lp-footer { background: #0E0C38; color: rgba(255,255,255,.65); padding-block: 28px calc(28px + 76px); font-size: .85rem; }
+.lp-footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+.lp-footer a { color: rgba(255,255,255,.8); }
+
+/* Barra fixa de WhatsApp no celular */
+.lp-mobile-bar {
+  display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(255,255,255,.97); box-shadow: 0 -8px 24px -12px rgba(21,19,79,.35);
+  gap: 10px;
+}
+.lp-mobile-bar .btn { flex: 1; padding: 13px 12px; }
+
+@media (max-width: 920px) {
+  .lp-hero-grid, .lp-two { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .lp-header .btn-label { display: none; }
+  .lp-header .btn { padding: 10px 12px; }
+  .lp-mobile-bar { display: flex; }
+  .lp-hero .btn-row .btn { width: 100%; }
+}
+@media (min-width: 641px) { .lp-footer { padding-bottom: 28px; } }
+
+.lp .wa-float { display: none; }
