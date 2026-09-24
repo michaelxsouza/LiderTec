@@ -351,8 +351,8 @@ function clearError(name) {
 }
 
 const validators = {
-  nome: (v) => !v.trim() ? "Informe seu nome completo." : v.trim().length < 3 ? "O nome precisa ter pelo menos 3 letras." : !/\s/.test(v.trim()) ? "Informe nome e sobrenome." : "",
-  whatsapp: (v) => { const d = v.replace(/\D/g, ""); return !d ? "Informe seu WhatsApp com DDD." : (d.length < 10 || d.length > 11) ? "Confira o número: use DDD + número, ex.: (31) 99999-9999." : ""; },
+  nome: (v) => v.trim().length < 2 ? "Informe seu nome." : "",
+  whatsapp: (v) => { const d = phoneDigits(v); return !d ? "Informe seu WhatsApp com DDD." : (d.length < 10 || d.length > 11) ? "Confira o número: use DDD + número, ex.: (31) 99999-9999." : ""; },
   email: (v) => !v.trim() ? "Informe seu e-mail." : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? "Confira o e-mail: ex.: nome@email.com." : "",
   cidade: (v) => !v.trim() ? "Informe sua cidade e estado." : v.trim().length < 3 ? "Informe cidade e estado, ex.: Belo Horizonte – MG." : "",
   curso: (v) => !v ? "Escolha o curso de interesse." : "",
@@ -366,8 +366,31 @@ function validateField(name) {
   return !msg;
 }
 
+// Normaliza telefone: remove +55 e zero inicial, fica só DDD + número
+function phoneDigits(v) {
+  let d = String(v).replace(/\D/g, "");
+  if (d.length > 11 && d.startsWith("55")) d = d.slice(2);
+  if (d.startsWith("0")) d = d.slice(1);
+  return d;
+}
+function showFormAlert(form, msg) {
+  let el = form.querySelector(".form-alert");
+  if (!el) {
+    el = document.createElement("p");
+    el.className = "form-alert";
+    el.setAttribute("role", "alert");
+    const btn = form.querySelector('button[type="submit"]');
+    btn.parentNode.insertBefore(el, btn);
+  }
+  el.textContent = msg;
+  el.hidden = !msg;
+}
+function focusField(el) {
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+  setTimeout(() => el.focus({ preventScroll: true }), 350);
+}
 function maskPhone(v) {
-  const d = v.replace(/\D/g, "").slice(0, 11);
+  const d = phoneDigits(v).slice(0, 11);
   if (d.length <= 2) return d ? `(${d}` : "";
   if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
   if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
@@ -401,17 +424,19 @@ function initForm() {
     const results = names.map(validateField);
     if (results.includes(false)) {
       const first = names[results.indexOf(false)];
-      $(`[name="${first === "consent" ? "consentimento" : first}"]`).focus();
-      toast("Confira os campos destacados.");
+      const n = results.filter((x) => !x).length;
+      showFormAlert(f, n > 1 ? `Faltam ${n} informações. Confira os campos em vermelho.` : "Falta uma informação. Confira o campo em vermelho.");
+      focusField($(`[name="${first === "consent" ? "consentimento" : first}"]`));
       return;
     }
+    showFormAlert(f, "");
     // honeypot: se preenchido, é provável spam — finge sucesso sem enviar
     if (f.empresa.value) { showSuccess(f.nome.value); return; }
 
     const course = ALL.find((c) => c.id === f.curso.value);
     const data = {
       nome: f.nome.value.trim(),
-      whatsapp: f.whatsapp.value.replace(/\D/g, ""),
+      whatsapp: phoneDigits(f.whatsapp.value),
       email: f.email.value.trim(),
       cidade_estado: f.cidade.value.trim(),
       curso: course ? courseLabel(course) : "Ainda não sei / quero orientação",

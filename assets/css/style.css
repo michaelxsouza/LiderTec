@@ -680,6 +680,8 @@ kbd { display: inline-block; padding: 1px 7px; border-radius: 6px; border: 1px s
 .modal-more:hover { color: var(--magenta); }
 .check a { color: var(--magenta); font-weight: 700; }
 
+.form-alert { margin: 0 0 12px; padding: 10px 14px; border-radius: 10px; background: #FFF1F3; border: 1px solid #F7C4CD; color: var(--danger); font-weight: 700; font-size: .9rem; text-align: center; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   html { scroll-behavior: auto; }
