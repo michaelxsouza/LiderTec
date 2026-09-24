@@ -40,15 +40,9 @@ O arquivo atual foi recortado da arte de divulgação e tem qualidade limitada. 
 1. Salve o logo oficial (de preferência SVG, ou PNG com fundo transparente) em `assets/img/`.
 2. No `index.html`, troque `logo-lidertec-provisorio.png` pelo nome do novo arquivo (aparece no cabeçalho e no rodapé).
 
-## 3. Fotos do topo (Hero)
+## 3. Imagem do topo (Hero)
 
-Os quatro cartões com ícone são espaços reservados para fotos oficiais. Em cada `<figure class="photo-slot ...">`, apague o bloco `<div class="slot-placeholder">…</div>` e coloque:
-
-```html
-<img src="assets/img/hero-saude.jpg" alt="Profissional da área da saúde">
-```
-
-Use fotos verticais (proporção aproximada 9:19, mínimo 400 × 850 px).
+A imagem fica em `assets/img/hero-lidertec.jpg` (recorte da arte completa, guardada em `assets/img/hero-lidertec-banner.jpg`). Para trocar, substitua o arquivo mantendo o mesmo nome, ou altere o `src` da tag `<img class="hero-img">` no `index.html`. Prefira imagens horizontais com as pessoas à direita e fundo claro.
 
 ## 4. Cursos
 
@@ -101,7 +95,7 @@ Procure por `[INSERIR` no `index.html` para encontrar todos os pontos:
 - Respostas do FAQ: matrícula, certificado, duração, horário, pagamento e documentos
 - E-mail, endereço, horário de atendimento e CNPJ
 - Três depoimentos reais, com autorização dos alunos
-- Fotos oficiais do topo e logo oficial
+- Logo oficial
 
 ## 7. Cores
 

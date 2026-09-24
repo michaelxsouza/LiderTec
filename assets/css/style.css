@@ -592,6 +592,41 @@ kbd { display: inline-block; padding: 1px 7px; border-radius: 6px; border: 1px s
   .contact-grid { border-radius: 24px; }
 }
 
+
+/* ---------- Hero com foto ---------- */
+.hero::before { display: none; }
+.hero-visual { display: block; padding-block: 0; }
+.hero-visual::before, .hero-visual::after { display: none; }
+.hero-img {
+  width: 100%; height: auto; max-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%), linear-gradient(180deg, #000 80%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 0, #000 14%), linear-gradient(180deg, #000 80%, transparent 100%);
+  mask-composite: intersect;
+  animation: rise .9s cubic-bezier(.2,.7,.2,1) both;
+}
+.hero-visual .chip-a { left: 4%; top: 18%; bottom: auto; }
+.trust-bar {
+  position: relative; z-index: 2; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 24px;
+  margin-top: 8px; padding: 20px 24px; border-radius: 20px; background: #fff; box-shadow: var(--shadow);
+}
+@media (min-width: 921px) {
+  .hero-grid { grid-template-columns: .9fr 1.1fr; gap: 24px; }
+  .hero-copy .btn-row .btn-lg { padding: 15px 22px; }
+  .hero-visual { margin-right: calc(-1 * (var(--gutter) + max(0px, (100vw - 1200px) / 2))); margin-left: -6%; }
+  .hero h1 { font-size: clamp(2.1rem, 3.6vw, 3rem); }
+}
+@media (max-width: 920px) {
+  .hero-visual { max-width: none; width: auto; margin-inline: calc(-1 * var(--gutter)); }
+  .hero-img {
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 85%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 85%, transparent 100%);
+  }
+  .hero-visual .chip-a { display: none; }
+  .trust-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) { .trust-bar { grid-template-columns: 1fr; } }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   html { scroll-behavior: auto; }
