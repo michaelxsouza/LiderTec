@@ -36,6 +36,7 @@ const COLUNAS = [
   ["utm_term", "utm_term"],
   ["gclid", "gclid"],
   ["consentimento", "Consentimento"],
+  ["suspeito", "Possível spam"],
 ];
 
 function doPost(e) {
@@ -61,6 +62,7 @@ function doPost(e) {
       if (chave === "enviado_em") return dataHora;
       if (chave === "whatsapp") return "'" + String(data.whatsapp || ""); // mantém zeros e evita notação científica
       if (chave === "consentimento") return data.consentimento ? "Sim" : "Não";
+      if (chave === "suspeito") return data.suspeito ? "Sim" : "";
       return data[chave] !== undefined ? String(data[chave]).slice(0, 2000) : "";
     });
     aba.appendRow(linha);

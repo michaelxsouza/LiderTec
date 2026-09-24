@@ -430,8 +430,8 @@ function initForm() {
       return;
     }
     showFormAlert(f, "");
-    // honeypot: se preenchido, é provável spam — finge sucesso sem enviar
-    if (f.empresa.value) { showSuccess(f.nome.value); return; }
+    // Campo anti-spam: não bloqueia (o preenchimento automático do navegador pode preenchê-lo); só marca o envio
+    const suspeito = Boolean(f.hp_x && f.hp_x.value);
 
     const course = ALL.find((c) => c.id === f.curso.value);
     const data = {
@@ -442,6 +442,7 @@ function initForm() {
       curso: course ? courseLabel(course) : "Ainda não sei / quero orientação",
       mensagem: f.mensagem.value.trim(),
       consentimento: true,
+      suspeito,
       origem: "site",
       pagina: location.pathname,
       ...(() => { const q = new URLSearchParams(location.search), o = {}; ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid"].forEach((k) => { if (q.get(k)) o[k] = q.get(k); }); return o; })(),

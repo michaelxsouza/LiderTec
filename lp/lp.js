@@ -138,7 +138,8 @@ if (form) {
       return;
     }
     showFormAlert(form, "");
-    if (form.elements.empresa.value) return; // honeypot anti-spam
+    // Campo anti-spam: não bloqueia (o preenchimento automático do navegador pode preenchê-lo); só marca o envio
+    const suspeito = Boolean(form.elements.hp_x && form.elements.hp_x.value);
 
     const data = {
       nome: fieldOf("nome").value.trim(),
@@ -151,6 +152,7 @@ if (form) {
       referencia: refCode,
       ...tracking,
       consentimento: true,
+      suspeito,
       enviado_em: new Date().toISOString(),
     };
 

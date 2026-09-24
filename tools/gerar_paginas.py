@@ -93,7 +93,7 @@ def page(c):
       <form id="lp-form" novalidate>
         <h2>Receba as informações</h2>
         <p>Preencha e um consultor fala com você pelo WhatsApp.</p>
-        <div class="hp" aria-hidden="true"><label for="f-empresa">Empresa</label><input type="text" id="f-empresa" name="empresa" tabindex="-1" autocomplete="off"></div>
+        <div class="hp" aria-hidden="true"><label for="f-hpx">Deixe em branco</label><input type="text" id="f-hpx" name="hp_x" tabindex="-1" autocomplete="nope" data-lpignore="true"></div>
         <div class="form-grid">
           <div class="field">
             <label for="f-nome">Nome completo <span class="req">*</span></label>
