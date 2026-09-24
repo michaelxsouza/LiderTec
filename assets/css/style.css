@@ -627,6 +627,19 @@ kbd { display: inline-block; padding: 1px 7px; border-radius: 6px; border: 1px s
 }
 @media (max-width: 640px) { .trust-bar { grid-template-columns: 1fr; } }
 
+
+/* Hero no celular: imagem vertical que sobe por trás dos botões (topo claro) */
+.hero-visual picture { display: block; }
+@media (max-width: 640px) {
+  .hero-copy { position: relative; z-index: 2; }
+  .hero-visual { position: relative; z-index: 1; margin-top: -38vw; }
+  .hero-img {
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 88%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 88%, transparent 100%);
+  }
+  .trust-bar { margin-top: -48px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   html { scroll-behavior: auto; }

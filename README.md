@@ -44,6 +44,8 @@ O arquivo atual foi recortado da arte de divulgação e tem qualidade limitada. 
 
 A imagem fica em `assets/img/hero-lidertec.jpg` (recorte da arte completa, guardada em `assets/img/hero-lidertec-banner.jpg`). Para trocar, substitua o arquivo mantendo o mesmo nome, ou altere o `src` da tag `<img class="hero-img">` no `index.html`. Prefira imagens horizontais com as pessoas à direita e fundo claro.
 
+No celular (telas até 640 px) o site usa a versão vertical `assets/img/hero-lidertec-mobile.jpg` (tag `<source>` dentro do `<picture>`). O topo claro dessa imagem fica por trás dos botões, então mantenha a parte de cima da imagem limpa.
+
 ## 4. Cursos
 
 Todos os cursos estão no objeto `COURSES` em `main.js`, separados por categoria (CT, IT, SEI). Cada curso aceita:

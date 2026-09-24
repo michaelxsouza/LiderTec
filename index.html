@@ -113,8 +113,12 @@
 
     <!-- Imagem do topo: assets/img/hero-lidertec.jpg (recorte da arte completa, hero-lidertec-banner.jpg) -->
     <div class="hero-visual">
-      <img class="hero-img" src="assets/img/hero-lidertec.jpg" width="1281" height="836" fetchpriority="high"
-           alt="Profissionais das áreas de segurança do trabalho, saúde e gestão">
+      <picture>
+        <!-- Celular: imagem vertical -->
+        <source media="(max-width: 640px)" srcset="assets/img/hero-lidertec-mobile.jpg" width="941" height="1672">
+        <img class="hero-img" src="assets/img/hero-lidertec.jpg" width="1281" height="836" fetchpriority="high"
+             alt="Profissionais das áreas de segurança do trabalho, saúde e gestão">
+      </picture>
       <div class="float-chip chip-a"><span class="chip-ic"><svg class="ic"><use href="#i-award"/></svg></span><span><strong>Formação profissional</strong><small>Diversas áreas de atuação</small></span></div>
     </div>
   </div>
