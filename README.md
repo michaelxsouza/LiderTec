@@ -9,6 +9,22 @@ assets/js/main.js                  WhatsApp, lista de cursos, filtros, modal e f
 assets/img/logo-lidertec-provisorio.png   Logo recortado do material de divulgação (PROVISÓRIO)
 ```
 
+## Rodar localmente
+
+Na primeira vez, instale as dependências:
+
+```
+npm install
+```
+
+Depois, sempre que quiser abrir o site:
+
+```
+npm run dev
+```
+
+O site abre em http://localhost:8000 e recarrega sozinho quando você salva um arquivo.
+
 ## 1. Configurações rápidas (`assets/js/main.js`, no topo)
 
 | Variável | O que faz |
